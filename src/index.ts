@@ -11,4 +11,5 @@ app.use(express.json());
 
 app.listen(AppConfig.PORT, () => {
     console.log(`Server listening on port ${AppConfig.PORT}`);
+    console.log('hello man')
 });
