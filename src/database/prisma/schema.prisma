@@ -105,7 +105,8 @@ model Section {
 model Topic {
   id Int @id @default(autoincrement())
   name String @db.VarChar(255)
-  creation_date DateTime @default(now())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
   author User @relation(fields: [authorId], references: [id])
   authorId Int
   like_count Int
@@ -127,7 +128,8 @@ model User_topic {
 
 model Message {
   id Int @id @default(autoincrement())
-  creation_date DateTime @default(now())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
   content String @db.Text
   author User @relation(fields: [authorId], references: [id])
   authorId Int
@@ -152,6 +154,11 @@ model User_message {
 // OTHER MODELS
 model Infos_bulle {
   id Int @id @default(autoincrement())
+  name String  @db.VarChar(255)
+  icon String @db.Text
+  content  String @db.Text
+  date_start DateTime
+  date_end DateTime
 }
 
 // COURSE MODELS
