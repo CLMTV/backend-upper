@@ -24,6 +24,9 @@ model User {
   points_courses Int
   tiktok_token String? @unique
   tiktok_username String? @unique
+
+  // Many to many
+  challenge Challenge[]
 }
 
 model Role {
@@ -51,13 +54,9 @@ model Challenge {
   date_end DateTime
   description String @db.Text
   hashtag String @db.VarChar(255)
-}
 
-model Challenge_user {
-  id Int @id @default(autoincrement())
-  id_challenge Int
-  user User @relation(fields: [userId], references: [id])
-  userId Int @unique
+  // Many to many
+  user User[]
 }
 
 model Results_snapshot {
