@@ -10,6 +10,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// USER MODEL
 model User {
   id Int @id @default(autoincrement())
   firstname String @db.VarChar(50)
@@ -23,4 +24,12 @@ model User {
   points_courses Int
   tiktok_token String? @unique
   tiktok_username String? @unique
+}
+
+// PLAN MODEL
+model Plan {
+  id Int @id @default(autoincrement())
+  name String @db.VarChar(50)
+  description String @db.Text
+  price Float
 }
