@@ -17,13 +17,13 @@ const getAllUsers = async(req: Request, res: Response) => {
 
 const createUser = async(req: Request, res: Response) => {
     console.log(req.body)
-    const {email, name} = req.body || {};
+    const {firstname, lastname, email, password} = req.body || {};
     if (!email) {
         return res.status(400).json({error: 'Email is required'});
     }
     try {
         const user = await prisma.user.create({
-            data: {email, name},
+            data: {firstname, lastname, email, password},
         });
         res.status(201).json(user);
     } catch (err: any) {
