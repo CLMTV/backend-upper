@@ -108,10 +108,10 @@ model Topic {
   id Int @id @default(autoincrement())
   name String @db.VarChar(255)
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
   author User @relation(fields: [authorId], references: [id])
   authorId Int
   like_count Int
+  flag_count Int
 
   // Many to many
   user_topic User_topic[]
@@ -123,7 +123,7 @@ model User_topic {
   topic Topic @relation(fields: [topicId], references: [id])
   topicId Int
   is_liked Boolean @default(false)
-  is_signalled Boolean @default(false)
+  is_flagged Boolean @default(false)
 
   @@id([userId, topicId])
 }
@@ -131,12 +131,11 @@ model User_topic {
 model Message {
   id Int @id @default(autoincrement())
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
   content String @db.Text
   author User @relation(fields: [authorId], references: [id])
   authorId Int
   like_count Int
-  signal_count Int
+  flag_count Int
 
   // Many to many
   user_message User_message[]
@@ -148,7 +147,7 @@ model User_message {
   message Message @relation(fields: [messageId], references: [id])
   messageId Int
   is_liked Boolean @default(false)
-  is_signalled Boolean @default(false)
+  is_flagged Boolean @default(false)
 
   @@id([userId, messageId])
 }
