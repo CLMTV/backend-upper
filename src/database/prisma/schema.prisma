@@ -24,3 +24,78 @@ model User {
   tiktok_token String? @unique
   tiktok_username String? @unique
 }
+
+// COURSE MODELS
+model Course {
+  id Int @id @default(autoincrement())
+  name String  @db.VarChar(255)
+  description String 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Many to many 
+  lesson Lesson[]
+  badge Badge[]
+}
+
+model Lesson {
+  id Int @id @default(autoincrement())
+  content String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  order Int
+  points Int
+
+  // One to many
+  courseId Int
+  course Course @relation(fields: [courseId], references: [id])
+
+  videoId Int 
+  video Video @relation(fields: [videoId], references: [id])
+
+  // Many to many 
+  media Media[]
+}
+
+model Media {
+  id Int @id @default(autoincrement())
+  file String // CHANGER AVEC FILE => lire doc Prisma
+
+  // Many to many 
+  lesson Lesson[]
+}
+
+model Video {
+  id Int @id @default(autoincrement())
+  link String
+
+  // Many to many 
+  lesson Lesson[]
+  timestamp Timestamp[]
+}
+
+model Timestamp {
+  id Int @id @default(autoincrement())
+  name String @db.VarChar(50)
+  description String
+  value String @db.VarChar(50)
+
+  // Many to many 
+  video Video[]
+}
+
+model Badge {
+  id Int @id @default(autoincrement())
+  name String @db.VarChar(255)
+  description String @db.VarChar(255)
+  points Int 
+  display_img String
+
+  // Many to many 
+  course Course[]
+}
+
+model Note {
+  id Int @id @default(autoincrement())
+  // à remplir 
+}
