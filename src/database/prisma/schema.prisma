@@ -28,6 +28,10 @@ model User {
 
   // Many to many
   challenge Challenge[]
+  topic Topic[]
+  user_topic User_topic[]
+  message Message[]
+  user_message User_message[]
 }
 
 model Role {
@@ -94,22 +98,55 @@ model User_lesson {
 // FORUM MODELS
 model Section {
   id Int @id @default(autoincrement())
+  name String @db.VarChar(255)
+  order Int
 }
 
 model Topic {
   id Int @id @default(autoincrement())
+  name String @db.VarChar(255)
+  creation_date DateTime @default(now())
+  author User @relation(fields: [authorId], references: [id])
+  authorId Int
+  like_count Int
+
+  // Many to many
+  user_topic User_topic[]
+}
+
+model User_topic {
+  user User @relation(fields: [userId], references: [id])
+  userId Int
+  topic Topic @relation(fields: [topicId], references: [id])
+  topicId Int
+  is_liked Boolean @default(false)
+  is_signalled Boolean @default(false)
+
+  @@id([userId, topicId])
 }
 
 model Message {
   id Int @id @default(autoincrement())
+  creation_date DateTime @default(now())
+  content String @db.Text
+  author User @relation(fields: [authorId], references: [id])
+  authorId Int
+  like_count Int
+  signal_count Int
+
+  // Many to many
+  user_message User_message[]
 }
 
 model User_message {
-  id Int @id @default(autoincrement())
-}
+  user User @relation(fields: [userId], references: [id])
+  userId Int
+  message Message @relation(fields: [messageId], references: [id])
+  messageId Int
+  is_liked Boolean @default(false)
+  is_signalled Boolean @default(false)
 
-model User_topic {
-  id Int @id @default(autoincrement())
+  @@id([userId, messageId])
 }
 
 // OTHER MODELS
