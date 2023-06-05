@@ -10,6 +10,9 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+
+// Users tables
+
 model User {
   id Int @id @default(autoincrement())
   firstname String @db.VarChar(50)
@@ -23,4 +26,42 @@ model User {
   points_courses Int
   tiktok_token String? @unique
   tiktok_username String? @unique
+}
+
+
+// Plans tables
+
+model Plan {
+  id Int @id @default(autoincrement())
+  name String @db.VarChar(50)
+  description String @db.Text
+  price Float
+}
+
+
+// Challenges tables
+
+model Challenges {
+  id Int @id @default(autoincrement())
+}
+
+
+// Categories tables
+
+model Category {
+  id Int @id @default(autoincrement())
+}
+
+
+// Courses tables
+
+model Course {
+  id Int @id @default(autoincrement())
+}
+
+
+// Forum tables
+
+model Forum {
+  id Int @id @default(autoincrement())
 }
