@@ -1,17 +1,14 @@
 import express from 'express';
-import dotenv from 'dotenv';
-
-// load environment variables
-dotenv.config();
+// import routes from './api/routes/index';
+import {AppConfig} from './config/AppConfig';
 
 const app = express();
 
-app.get('/', (req, res) => {
-    res.send('Hello World!');
-});
+// Use built-in Express middleware to parse JSON request bodies
+app.use(express.json());
 
-const PORT = process.env.PORT || 3000;
+// app.use(routes);
 
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+app.listen(AppConfig.PORT, () => {
+    console.log(`Server listening on port ${AppConfig.PORT}`);
 });
