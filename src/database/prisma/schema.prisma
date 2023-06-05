@@ -134,13 +134,14 @@ model Topic {
 }
 
 model User_topic {
-  id Int @id @default(autoincrement())
   user User @relation(fields: [userId], references: [id])
   userId Int
   topic Topic @relation(fields: [topicId], references: [id])
   topicId Int
   is_liked Boolean @default(false)
   is_signalled Boolean @default(false)
+
+  @@id([userId, topicId])
 }
 
 model Message {
@@ -157,13 +158,14 @@ model Message {
 }
 
 model User_message {
-  id Int @id @default(autoincrement())
   user User @relation(fields: [userId], references: [id])
   userId Int
   message Message @relation(fields: [messageId], references: [id])
   messageId Int
   is_liked Boolean @default(false)
   is_signalled Boolean @default(false)
+
+  @@id([userId, messageId])
 }
 
 // OTHER MODELS
