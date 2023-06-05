@@ -7,9 +7,9 @@ const router = express.Router();
 
 router.get('/', helloUsers)
 // Create a new user
-router.post("/users" , createUser)
+router.post("/create" , createUser)
 // Get all users
-router.get('/users', getAllUsers)
+router.get('/getAll', getAllUsers)
 
 
 export default router;
