@@ -10,9 +10,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
-// Users tables
-
+// USER MODELS
 model User {
   id Int @id @default(autoincrement())
   firstname String @db.VarChar(50)
@@ -26,11 +24,20 @@ model User {
   points_courses Int
   tiktok_token String? @unique
   tiktok_username String? @unique
+
+  // Many to many
+  challenge Challenge[]
 }
 
+model Role {
+  id Int @id @default(autoincrement())
+}
 
-// Plans tables
+model Ban {
+  id Int @id @default(autoincrement())
+}
 
+// PLAN MODELS
 model Plan {
   id Int @id @default(autoincrement())
   name String @db.VarChar(50)
@@ -38,30 +45,93 @@ model Plan {
   price Float
 }
 
+// CHALLENGE MODELS
+model Challenge {
+  id Int @id @default(autoincrement())
+  name String @db.VarChar(255)
+  id_instrument Int
+  date_start DateTime
+  date_end DateTime
+  description String @db.Text
+  hashtag String @db.VarChar(255)
 
-// Challenges tables
+  // Many to many
+  user User[]
+}
 
-model Challenges {
+model Results_snapshot {
   id Int @id @default(autoincrement())
 }
 
-
-// Categories tables
-
+// CATEGORY MODELS
 model Category {
   id Int @id @default(autoincrement())
 }
 
+model Instrument {
+  id Int @id @default(autoincrement())
+}
 
-// Courses tables
-
+// COURSE MODELS
 model Course {
   id Int @id @default(autoincrement())
 }
 
+model Lesson {
+  id Int @id @default(autoincrement())
+}
 
-// Forum tables
+model Media {
+  id Int @id @default(autoincrement())
+}
 
-model Forum {
+model Video {
+  id Int @id @default(autoincrement())
+}
+
+model Timestamp {
+  id Int @id @default(autoincrement())
+}
+
+model Badge {
+  id Int @id @default(autoincrement())
+}
+
+model Note {
+  id Int @id @default(autoincrement())
+}
+
+model User_course {
+  id Int @id @default(autoincrement())
+}
+
+model User_lesson {
+  id Int @id @default(autoincrement())
+}
+
+
+// FORUM MODELS
+model Section {
+  id Int @id @default(autoincrement())
+}
+
+model Topic {
+  id Int @id @default(autoincrement())
+}
+
+model Message {
+  id Int @id @default(autoincrement())
+}
+
+model User_message {
+  id Int @id @default(autoincrement())
+}
+
+model User_topic {
+  id Int @id @default(autoincrement())
+}
+
+// OTHER MODELS
+model Infos_bulle {
   id Int @id @default(autoincrement())
 }
