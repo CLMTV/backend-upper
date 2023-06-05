@@ -33,3 +33,21 @@ model Plan {
   description String @db.Text
   price Float
 }
+
+// CHALLENGE
+model Challenge_user {
+  id Int @id @default(autoincrement())
+  id_challenge Int
+  user User @relation(fields: [userId], references: [id])
+  userId Int @unique
+}
+
+model Challenge {
+  id Int @id @default(autoincrement())
+  name String @db.VarChar(255)
+  id_instrument Int
+  date_start DateTime
+  date_end DateTime
+  description String @db.Text
+  hashtag String @db.VarChar(255)
+}
