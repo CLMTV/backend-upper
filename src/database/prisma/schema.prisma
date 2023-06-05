@@ -80,34 +80,7 @@ model Instrument {
   categoryId Int
 }
 
-// COURSE MODELS
-model Course {
-  id Int @id @default(autoincrement())
-}
 
-model Lesson {
-  id Int @id @default(autoincrement())
-}
-
-model Media {
-  id Int @id @default(autoincrement())
-}
-
-model Video {
-  id Int @id @default(autoincrement())
-}
-
-model Timestamp {
-  id Int @id @default(autoincrement())
-}
-
-model Badge {
-  id Int @id @default(autoincrement())
-}
-
-model Note {
-  id Int @id @default(autoincrement())
-}
 
 model User_course {
   id Int @id @default(autoincrement())
