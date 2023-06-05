@@ -26,6 +26,14 @@ model User {
   tiktok_username String? @unique
 }
 
+model Role {
+  id Int @id @default(autoincrement())
+}
+
+model Ban {
+  id Int @id @default(autoincrement())
+}
+
 // PLAN MODELS
 model Plan {
   id Int @id @default(autoincrement())
@@ -35,13 +43,6 @@ model Plan {
 }
 
 // CHALLENGE MODELS
-model Challenge_user {
-  id Int @id @default(autoincrement())
-  id_challenge Int
-  user User @relation(fields: [userId], references: [id])
-  userId Int @unique
-}
-
 model Challenge {
   id Int @id @default(autoincrement())
   name String @db.VarChar(255)
@@ -52,8 +53,23 @@ model Challenge {
   hashtag String @db.VarChar(255)
 }
 
+model Challenge_user {
+  id Int @id @default(autoincrement())
+  id_challenge Int
+  user User @relation(fields: [userId], references: [id])
+  userId Int @unique
+}
+
+model Results_snapshot {
+  id Int @id @default(autoincrement())
+}
+
 // CATEGORY MODELS
 model Category {
+  id Int @id @default(autoincrement())
+}
+
+model Instrument {
   id Int @id @default(autoincrement())
 }
 
@@ -62,8 +78,57 @@ model Course {
   id Int @id @default(autoincrement())
 }
 
+model Lesson {
+  id Int @id @default(autoincrement())
+}
+
+model Media {
+  id Int @id @default(autoincrement())
+}
+
+model Video {
+  id Int @id @default(autoincrement())
+}
+
+model Timestamp {
+  id Int @id @default(autoincrement())
+}
+
+model Badge {
+  id Int @id @default(autoincrement())
+}
+
+model Note {
+  id Int @id @default(autoincrement())
+}
+
+model User_course {
+  id Int @id @default(autoincrement())
+}
+
+model User_lesson {
+  id Int @id @default(autoincrement())
+}
+
+
 // FORUM MODELS
-model Forum {
+model Section {
+  id Int @id @default(autoincrement())
+}
+
+model Topic {
+  id Int @id @default(autoincrement())
+}
+
+model Message {
+  id Int @id @default(autoincrement())
+}
+
+model User_message {
+  id Int @id @default(autoincrement())
+}
+
+model User_topic {
   id Int @id @default(autoincrement())
 }
 
