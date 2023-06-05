@@ -72,6 +72,7 @@ model Results_snapshot {
 // CATEGORY MODELS
 model Category {
   id Int @id @default(autoincrement())
+  name String @db.VarChar(255)
   content String @db.VarChar(255)
   instrument Instrument[]
 
