@@ -14,8 +14,8 @@ router.get('/getAll', getAllCategories)
 router.get('/getById', getCategoryById)
 
 // Update category
-router.get('/update', updateCategory)
+router.patch('/update', updateCategory)
 
 // Delete categoryById
-router.get('/deleteById', deleteCategoryById)
+router.delete('/deleteById', deleteCategoryById)
 export default router;
