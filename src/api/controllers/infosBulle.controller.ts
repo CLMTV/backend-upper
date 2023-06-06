@@ -29,7 +29,10 @@ const getInfosBulleById = async (req: Request, res: Response) => {
 
 const createInfosBulle = async (req: Request, res: Response) => {
     console.log(req.body)
-    const {name, icon, content, date_start, date_end} = req.body || {};
+    let {name, icon, content, date_start, date_end} = req.body || {};
+
+    date_start = new Date(date_start);
+    date_end = new Date(date_end);
 
     try {
         const infos_bulle = await prisma.infos_bulle.create({
