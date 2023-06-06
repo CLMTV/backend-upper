@@ -12,13 +12,13 @@ router.post("/create" , createInfosBulle)
 router.get('/getAll', getAllInfosBulles)
 
 // Get infosBulle by id
-router.get('/getById', getInfosBulleById)
+router.get('/getById/:id', getInfosBulleById)
 
 // Update infosBulle
-router.patch('/update', updateInfosBulle)
+router.patch('/update/:id', updateInfosBulle)
 
 // Delete infosBulle
-router.delete('/deleteById', deleteInfosBulleById)
+router.delete('/deleteById/:id', deleteInfosBulleById)
 
 
 export default router;

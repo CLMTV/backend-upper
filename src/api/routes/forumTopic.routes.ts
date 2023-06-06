@@ -12,10 +12,10 @@ router.post("/create" , createTopic)
 router.get('/getAll', getAllTopics)
 
 // Get topic by id
-router.get('/getById', getTopicById)
+router.get('/getById/:id', getTopicById)
 
 // Delete topic
-router.delete('/deleteById', deleteTopicById)
+router.delete('/deleteById/:id', deleteTopicById)
 
 
 export default router;

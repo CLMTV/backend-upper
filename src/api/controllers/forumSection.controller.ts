@@ -14,11 +14,16 @@ const getAllSections = async (req: Request, res: Response) => {
 }
 
 const getSectionById = async (req: Request, res: Response) => {
-    const {id} = req.body
+    const {id} = req.params
+
+    if (!id) {
+        return res.status(400).json({error: 'id is required'});
+    }
     try {
+        const parsedId = parseInt(id, 10);
         const section = await prisma.section.findUnique({
             where: {
-                id: id
+                id: parsedId
             }
         });
         res.status(200).json(section);
@@ -42,15 +47,17 @@ const createSection = async (req: Request, res: Response) => {
 }
 
 const updateSection = async (req: Request, res: Response) => {
-    const {id, name, order} = req.body || {};
+    const {name, order} = req.body || {};
+    const {id} = req.params
 
     if (!id) {
         return res.status(400).json({error: 'id is required'});
     }
     try {
+        const parsedId = parseInt(id, 10);
         const updateSection = await prisma.section.update({
             where: {
-                id: id
+                id: parsedId
             },
             data: {
                 name: name,
@@ -65,11 +72,16 @@ const updateSection = async (req: Request, res: Response) => {
 }
 
 const deleteSectionById = async (req: Request, res: Response) => {
-    const {id} = req.body
+    const {id} = req.params
+
+    if (!id) {
+        return res.status(400).json({error: 'id is required'});
+    }
     try {
+        const parsedId = parseInt(id, 10);
         const deleteSection = await prisma.section.delete({
             where: {
-                id: id
+                id: parsedId
             }
         });
         res.status(200).json(deleteSection);

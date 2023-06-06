@@ -13,29 +13,17 @@ const getAllForumMessages = async (req: Request, res: Response) => {
     }
 }
 
-const getAllUserMessages = async (req: Request, res: Response) => {
-    const {id} = req.body
-    try {
-        const messages = await prisma.user.findUnique({
-            where: {
-                id: id,
-            },
-            include: {
-                message: true,
-            },
-        });
-        res.status(200).json(messages);
-    } catch (err: any) {
-        res.status(400).json({error: err.message});
-    }
-}
-
 const getForumMessageById = async (req: Request, res: Response) => {
-    const {id} = req.body
+    const {id} = req.params
+
+    if (!id) {
+        return res.status(400).json({error: 'id is required'});
+    }
     try {
+        const parsedId = parseInt(id, 10);
         const message = await prisma.message.findUnique({
             where: {
-                id: id
+                id: parsedId
             }
         });
         res.status(200).json(message);
@@ -59,11 +47,16 @@ const createForumMessage = async (req: Request, res: Response) => {
 }
 
 const deleteForumMessageById = async (req: Request, res: Response) => {
-    const {id} = req.body
+    const {id} = req.params
+
+    if (!id) {
+        return res.status(400).json({error: 'id is required'});
+    }
     try {
+        const parsedId = parseInt(id, 10);
         const deleteForumMessage = await prisma.message.delete({
             where: {
-                id: id
+                id: parsedId
             }
         });
         res.status(200).json(deleteForumMessage);
@@ -72,4 +65,4 @@ const deleteForumMessageById = async (req: Request, res: Response) => {
     }
 }
 
-export {getAllForumMessages, getAllUserMessages, createForumMessage, getForumMessageById, deleteForumMessageById}
+export {getAllForumMessages, createForumMessage, getForumMessageById, deleteForumMessageById}

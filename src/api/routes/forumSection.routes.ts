@@ -12,13 +12,13 @@ router.post("/create" , createSection)
 router.get('/getAll', getAllSections)
 
 // Get section by id
-router.get('/getById', getSectionById)
+router.get('/getById/:id', getSectionById)
 
 // Update section
-router.patch('/update', updateSection)
+router.patch('/update/:id', updateSection)
 
 // Delete section
-router.delete('/deleteById', deleteSectionById)
+router.delete('/deleteById/:id', deleteSectionById)
 
 
 export default router;
