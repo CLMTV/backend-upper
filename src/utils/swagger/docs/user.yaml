@@ -1,0 +1,97 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Your API title
+paths:
+  /user/create:
+    post:
+      tags:
+        - Users
+      description: Create a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                firstname:
+                  type: string
+                lastname:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '201':
+          description: Returns the created user
+        '400':
+          description: Returns an error message
+  /user/getAll:
+    get:
+      tags:
+        - Users
+      description: Get all users
+      responses:
+        '200':
+          description: Returns all users
+        '400':
+          description: Returns an error message
+  /user/getById/{id}:
+    get:
+      tags:
+        - Users
+      description: Get user by id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: number
+      responses:
+        '200':
+          description: Returns a single user
+        '400':
+          description: Returns an error message
+  /user/update/{id}:
+    patch:
+      tags:
+        - Users
+      description: Update user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: number
+                firstname:
+                  type: string
+                lastname:
+                  type: string
+                email:
+                  type: string
+      responses:
+        '200':
+          description: Returns the updated user
+        '400':
+          description: Returns an error message
+  /user/deleteById/{id}:
+    delete:
+      tags:
+        - Users
+      description: Delete user by id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: number
+      responses:
+        '200':
+          description: Returns a success message
+        '400':
+          description: Returns an error message
