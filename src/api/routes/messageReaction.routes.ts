@@ -12,13 +12,13 @@ router.post("/create" , createMessageReaction)
 router.get('/getAll', getAllMessageReactions)
 
 // Get section by id
-router.get('/getById', getMessageReactionById)
+router.get('/getById/:id', getMessageReactionById)
 
 // Update section
-router.patch('/update', updateMessageReaction)
+router.patch('/update/:id', updateMessageReaction)
 
 // Delete section
-router.delete('/deleteById', deleteMessageReactionById)
+router.delete('/deleteById/:id', deleteMessageReactionById)
 
 
 export default router;

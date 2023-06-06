@@ -14,11 +14,16 @@ const getAllInfosBulles = async (req: Request, res: Response) => {
 }
 
 const getInfosBulleById = async (req: Request, res: Response) => {
-    const {id} = req.body
+    const {id} = req.params
+
+    if (!id) {
+        return res.status(400).json({error: 'id is required'});
+    }
     try {
+        const parsedId = parseInt(id, 10);
         const infos_bulle = await prisma.infos_bulle.findUnique({
             where: {
-                id: id
+                id: parsedId
             }
         });
         res.status(200).json(infos_bulle);
@@ -45,15 +50,17 @@ const createInfosBulle = async (req: Request, res: Response) => {
 }
 
 const updateInfosBulle = async (req: Request, res: Response) => {
-    const {id, name, icon, content, date_start, date_end} = req.body || {};
+    const {name, icon, content, date_start, date_end} = req.body || {};
+    const {id} = req.params
 
     if (!id) {
         return res.status(400).json({error: 'id is required'});
     }
     try {
+        const parsedId = parseInt(id, 10);
         const updateInfosBulle = await prisma.infos_bulle.update({
             where: {
-                id: id
+                id: parsedId
             },
             data: {
                 name: name,
@@ -71,11 +78,16 @@ const updateInfosBulle = async (req: Request, res: Response) => {
 }
 
 const deleteInfosBulleById = async (req: Request, res: Response) => {
-    const {id} = req.body
+    const {id} = req.params
+
+    if (!id) {
+        return res.status(400).json({error: 'id is required'});
+    }
     try {
+        const parsedId = parseInt(id, 10);
         const deleteInfosBulle = await prisma.infos_bulle.delete({
             where: {
-                id: id
+                id: parsedId
             }
         });
         res.status(200).json(deleteInfosBulle);

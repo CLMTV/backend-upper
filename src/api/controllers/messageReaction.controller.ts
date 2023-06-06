@@ -14,11 +14,16 @@ const getAllMessageReactions = async (req: Request, res: Response) => {
 }
 
 const getMessageReactionById = async (req: Request, res: Response) => {
-    const {id} = req.body
+    const {id} = req.params
+
+    if (!id) {
+        return res.status(400).json({error: 'id is required'});
+    }
     try {
+        const parsedId = parseInt(id, 10);
         const message_reaction = await prisma.message_reaction.findUnique({
             where: {
-                id: id
+                id: parsedId
             }
         });
         res.status(200).json(message_reaction);
@@ -42,15 +47,17 @@ const createMessageReaction = async (req: Request, res: Response) => {
 }
 
 const updateMessageReaction = async (req: Request, res: Response) => {
-    const {id, isLiked, isFlagged, userId, messageId} = req.body || {};
+    const {isLiked, isFlagged, userId, messageId} = req.body || {};
+    const {id} = req.params
 
     if (!id) {
         return res.status(400).json({error: 'id is required'});
     }
     try {
+        const parsedId = parseInt(id, 10);
         const updateMessageReaction = await prisma.message_reaction.update({
             where: {
-                id: id
+                id: parsedId
             },
             data: {
                 isLiked: isLiked,
@@ -67,11 +74,16 @@ const updateMessageReaction = async (req: Request, res: Response) => {
 }
 
 const deleteMessageReactionById = async (req: Request, res: Response) => {
-    const {id} = req.body
+    const {id} = req.params
+
+    if (!id) {
+        return res.status(400).json({error: 'id is required'});
+    }
     try {
+        const parsedId = parseInt(id, 10);
         const deleteMessageReaction = await prisma.message_reaction.delete({
             where: {
-                id: id
+                id: parsedId
             }
         });
         res.status(200).json(deleteMessageReaction);

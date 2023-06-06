@@ -14,11 +14,16 @@ const getAllTopics = async (req: Request, res: Response) => {
 }
 
 const getTopicById = async (req: Request, res: Response) => {
-    const {id} = req.body
+    const {id} = req.params
+
+    if (!id) {
+        return res.status(400).json({error: 'id is required'});
+    }
     try {
+        const parsedId = parseInt(id, 10);
         const topic = await prisma.topic.findUnique({
             where: {
-                id: id
+                id: parsedId
             }
         });
         res.status(200).json(topic);
@@ -42,11 +47,16 @@ const createTopic = async (req: Request, res: Response) => {
 }
 
 const deleteTopicById = async (req: Request, res: Response) => {
-    const {id} = req.body
+    const {id} = req.params
+
+    if (!id) {
+        return res.status(400).json({error: 'id is required'});
+    }
     try {
+        const parsedId = parseInt(id, 10);
         const deleteTopic = await prisma.topic.delete({
             where: {
-                id: id
+                id: parsedId
             }
         });
         res.status(200).json(deleteTopic);

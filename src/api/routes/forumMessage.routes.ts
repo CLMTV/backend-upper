@@ -1,5 +1,5 @@
 import express from 'express';
-import {createForumMessage, getAllForumMessages, getAllUserMessages, getForumMessageById, deleteForumMessageById} from "../controllers/forumMessage.controller";
+import {createForumMessage, getAllForumMessages, getForumMessageById, deleteForumMessageById} from "../controllers/forumMessage.controller";
 
 // Variables
 const router = express.Router();
@@ -11,14 +11,11 @@ router.post("/create" , createForumMessage)
 // Get all forumMessages
 router.get('/getAll', getAllForumMessages)
 
-// Get all forumMessages
-router.get('/getUserMessages', getAllUserMessages)
-
 // Get forumMessage by id
-router.get('/getById', getForumMessageById)
+router.get('/getById/:id', getForumMessageById)
 
 // Delete forumMessage
-router.delete('/deleteById', deleteForumMessageById)
+router.delete('/deleteById/:id', deleteForumMessageById)
 
 
 export default router;
