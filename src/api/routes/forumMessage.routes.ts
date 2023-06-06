@@ -5,16 +5,16 @@ import {createForumMessage, getAllForumMessages, getForumMessageById, deleteForu
 const router = express.Router();
 
 
-// Create a new forumMessage
+// Create a new message
 router.post("/create" , createForumMessage)
 
-// Get all forumMessages
+// Get all messages
 router.get('/getAll', getAllForumMessages)
 
-// Get forumMessage by id
+// Get message by id
 router.get('/getById/:id', getForumMessageById)
 
-// Delete forumMessage
+// Delete message
 router.delete('/deleteById/:id', deleteForumMessageById)
 
 

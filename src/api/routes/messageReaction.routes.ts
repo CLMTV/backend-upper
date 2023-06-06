@@ -5,19 +5,19 @@ import {createMessageReaction, getAllMessageReactions, getMessageReactionById, u
 const router = express.Router();
 
 
-// Create a new section
+// Create a new message reaction
 router.post("/create" , createMessageReaction)
 
-// Get all sections
+// Get all message reactions
 router.get('/getAll', getAllMessageReactions)
 
-// Get section by id
+// Get message reaction by id
 router.get('/getById/:id', getMessageReactionById)
 
-// Update section
+// Update message reaction
 router.patch('/update/:id', updateMessageReaction)
 
-// Delete section
+// Delete message reaction
 router.delete('/deleteById/:id', deleteMessageReactionById)
 
 
