@@ -5,19 +5,19 @@ import {createTopicReaction, getAllTopicReactions, getTopicReactionById, updateT
 const router = express.Router();
 
 
-// Create a new section
+// Create a new topic reaction
 router.post("/create" , createTopicReaction)
 
-// Get all sections
+// Get all topic reactions
 router.get('/getAll', getAllTopicReactions)
 
-// Get section by id
+// Get topic reaction by id
 router.get('/getById/:id', getTopicReactionById)
 
-// Update section
+// Update topic reaction
 router.patch('/update/:id', updateTopicReaction)
 
-// Delete section
+// Delete topic reaction
 router.delete('/deleteById/:id', deleteTopicReactionById)
 
 
