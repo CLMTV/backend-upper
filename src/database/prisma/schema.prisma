@@ -102,6 +102,9 @@ model Section {
   id Int @id @default(autoincrement())
   name String @db.VarChar(255)
   order Int
+
+  // Many
+  topic Topic[]
 }
 
 model Topic {
@@ -114,9 +117,12 @@ model Topic {
   // One
   author User @relation(fields: [authorId], references: [id])
   authorId Int
+  section Section @relation(fields: [sectionId], references: [id])
+  sectionId Int
 
   // Many
   topic_reaction Topic_reaction[]
+  message Message[]
 }
 
 model Topic_reaction {
@@ -142,6 +148,8 @@ model Message {
   // One
   author User @relation(fields: [authorId], references: [id])
   authorId Int
+  topic Topic @relation(fields: [topicId], references: [id])
+  topicId Int
 
   // Many
   message_reaction Message_reaction[]

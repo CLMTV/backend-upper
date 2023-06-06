@@ -29,14 +29,11 @@ const getTopicById = async (req: Request, res: Response) => {
 
 const createTopic = async (req: Request, res: Response) => {
     console.log(req.body)
-    const {name, authorId} = req.body || {};
-
-    let like_count = 0;
-    let flag_count = 0;
+    const {name, authorId, sectionId} = req.body || {};
 
     try {
         const topic = await prisma.topic.create({
-            data: {name, authorId, like_count, flag_count},
+            data: {name, authorId, sectionId},
         });
         res.status(201).json(topic);
     } catch (err: any) {
