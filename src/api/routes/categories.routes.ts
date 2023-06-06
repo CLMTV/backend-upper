@@ -11,11 +11,11 @@ router.post("/create", createCategory)
 router.get('/getAll', getAllCategories)
 
 // Get user by id
-router.get('/getById', getCategoryById)
+router.get('/getById/:id', getCategoryById)
 
 // Update category
-router.patch('/update', updateCategory)
+router.patch('/update/:id', updateCategory)
 
 // Delete categoryById
-router.delete('/deleteById', deleteCategoryById)
+router.delete('/deleteById/:id', deleteCategoryById)
 export default router;

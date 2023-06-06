@@ -10,9 +10,14 @@ import infosBulleRoutes from "./infosBulle.routes"
 import coursesRoutes from './course.routes'
 import lessonRoutes from './lesson.routes'
 import bagdeRoutes from './badge.routes'
+import instrumentsRoutes from "./instrument.routes"
+const app = express();
+
 const router = express.Router();
 
-router.use('/users', userRoutes);
+
+
+router.use('/user', userRoutes);
 router.use('/categories', categoriesRoutes)
 router.use('/section', sectionRoutes)
 router.use('/topic', topicRoutes)
@@ -23,5 +28,6 @@ router.use('/infosBulle', infosBulleRoutes)
 router.use('/courses', coursesRoutes);
 router.use('/lessons', lessonRoutes);
 router.use('/badge', bagdeRoutes);
+router.use('/instrument', instrumentsRoutes)
 
 export default router;

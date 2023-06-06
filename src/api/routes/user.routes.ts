@@ -12,13 +12,15 @@ router.post("/create" , createUser)
 router.get('/getAll', getAllUsers)
 
 // Get user by id
-router.get('/getById', getUserById)
+router.get('/getById/:id', getUserById)
 
 // Update user
-router.patch('/update', updateUser)
+router.patch('/update/:id', updateUser)
 
 // Delete user
-router.delete('/deleteById', deleteUserById)
+router.delete('/deleteById/:id', deleteUserById)
 
 
 export default router;
+
+

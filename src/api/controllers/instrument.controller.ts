@@ -3,52 +3,52 @@ import {Request, Response} from 'express';
 const {PrismaClient} = require('@prisma/client');
 const prisma = new PrismaClient();
 
-// GET ALL CATEGORIES
-const getAllCategories = async (req: Request, res: Response) => {
+// GET ALL INSTRUMENTS
+const getAllInstruments = async (req: Request, res: Response) => {
     try {
-        const categories = await prisma.category.findMany();
-        res.status(200).json(categories);
+        const instruments = await prisma.instrument.findMany();
+        res.status(200).json(instruments);
     } catch (err: any) {
         res.status(400).json({error: err.message});
     }
 }
 
 
-// GET CATEGORY BY ID
-const getCategoryById = async (req: Request, res: Response) => {
+// GET INSTRUMENT BY ID
+const getInstrumentById = async (req: Request, res: Response) => {
     const {id} = req.params
     try {
         const parsedId = parseInt(id, 10);
-        const category = await prisma.category.findUnique({
+        const instrument = await prisma.instrument.findUnique({
             where: {
                 id: parsedId
             }
         });
-        res.status(200).json(category);
+        res.status(200).json(instrument);
     } catch (err: any) {
         res.status(400).json({error: err.message});
     }
 }
 
-// CREATE CATEGORY
-const createCategory = async (req: Request, res: Response) => {
+// CREATE INSTRUMENT
+const createInstrument = async (req: Request, res: Response) => {
     const {name} = req.body || {};
     if (!name) {
         return res.status(400).json({error: 'name is required'});
     }
     try {
-        const createCategory = await prisma.category.create({
+        const instrument = await prisma.instrument.create({
             data: name,
         });
-        res.status(201).json(createCategory);
+        res.status(201).json(instrument);
     } catch (err: any) {
         res.status(400).json({error: err.message});
     }
 }
 
-// UPDATE CATEGORY
-const updateCategory = async (req: Request, res: Response) => {
-    const {name, content} = req.body || {};
+// UPDATE INSTRUMENT
+const updateInstrument = async (req: Request, res: Response) => {
+    const {name} = req.body || {};
     const {id} = req.params
 
     if (!id) {
@@ -56,36 +56,34 @@ const updateCategory = async (req: Request, res: Response) => {
     }
     try {
         const parsedId = parseInt(id, 10);
-        const updateCategory = await prisma.category.update({
+        const updateInstrument = await prisma.instrument.update({
             where: {
                 id: parsedId
             },
             data: {
-                name: name,
-                content: content
+                name: name
             }
         })
-        res.status(200).json(updateCategory);
-
+        res.status(200).json(updateInstrument);
     } catch (err: any) {
         res.status(400).json({error: err.message});
     }
 }
 
-// DELETE CATEGORY BY ID
-const deleteCategoryById = async (req: Request, res: Response) => {
+// DELETE INSTRUMENT BY ID
+const deleteInstrumentById = async (req: Request, res: Response) => {
     const {id} = req.params
     try {
         const parsedId = parseInt(id, 10);
-        const deleteCategory = await prisma.category.delete({
+        const deleteInstrument = await prisma.instrument.delete({
             where: {
                 id: parsedId
             }
         });
-        res.status(200).json(deleteCategory);
+        res.status(200).json(deleteInstrument);
     } catch (err: any) {
         res.status(400).json({error: err.message});
     }
 }
 
-export {createCategory, getCategoryById, getAllCategories, updateCategory, deleteCategoryById}
+export {createInstrument, getAllInstruments, getInstrumentById, updateInstrument, deleteInstrumentById}
