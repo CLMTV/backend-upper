@@ -55,7 +55,7 @@ model Ban {
   id Int @id @default(autoincrement())
   description String @db.VarChar(255)
   date_start DateTime @default(now())
-  date_end DateTime?
+  date_end DateTime? // Or add default?
 
   // Has one
   user User @relation(fields: [userId], references: [id])
