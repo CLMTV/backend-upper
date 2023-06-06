@@ -6,8 +6,8 @@ const prisma = new PrismaClient();
 
 const getAllForumMessages = async (req: Request, res: Response) => {
     try {
-        const infos_bulles = await prisma.infos_bulle.findMany();
-        res.status(200).json(infos_bulles);
+        const messages = await prisma.message.findMany();
+        res.status(200).json(messages);
     } catch (err: any) {
         res.status(400).json({error: err.message});
     }
@@ -16,12 +16,12 @@ const getAllForumMessages = async (req: Request, res: Response) => {
 const getForumMessageById = async (req: Request, res: Response) => {
     const {id} = req.body
     try {
-        const infos_bulle = await prisma.infos_bulle.findUnique({
+        const message = await prisma.message.findUnique({
             where: {
                 id: id
             }
         });
-        res.status(200).json(infos_bulle);
+        res.status(200).json(message);
     } catch (err: any) {
         res.status(400).json({error: err.message});
     }
@@ -29,16 +29,13 @@ const getForumMessageById = async (req: Request, res: Response) => {
 
 const createForumMessage = async (req: Request, res: Response) => {
     console.log(req.body)
-    let {name, icon, content, date_start, date_end} = req.body || {};
-
-    date_start = new Date(date_start);
-    date_end = new Date(date_end);
+    const {content, authorId, topicId} = req.body || {};
 
     try {
-        const infos_bulle = await prisma.infos_bulle.create({
-            data: {name, icon, content, date_start, date_end},
+        const message = await prisma.message.create({
+            data: {content, authorId, topicId},
         });
-        res.status(201).json(infos_bulle);
+        res.status(201).json(message);
     } catch (err: any) {
         res.status(400).json({error: err.message});
     }
@@ -47,7 +44,7 @@ const createForumMessage = async (req: Request, res: Response) => {
 const deleteForumMessageById = async (req: Request, res: Response) => {
     const {id} = req.body
     try {
-        const deleteForumMessage = await prisma.infos_bulle.delete({
+        const deleteForumMessage = await prisma.message.delete({
             where: {
                 id: id
             }
