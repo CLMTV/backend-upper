@@ -6,7 +6,7 @@ const router = express.Router();
 
 
 // Create a new message
-router.post("/create" , createForumMessage)
+router.post('/create' , createForumMessage)
 
 // Get all messages
 router.get('/getAll', getAllForumMessages)

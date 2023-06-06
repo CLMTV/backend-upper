@@ -6,7 +6,7 @@ const router = express.Router();
 
 
 // Create a new message reaction
-router.post("/create" , createMessageReaction)
+router.post('/create' , createMessageReaction)
 
 // Get all message reactions
 router.get('/getAll', getAllMessageReactions)

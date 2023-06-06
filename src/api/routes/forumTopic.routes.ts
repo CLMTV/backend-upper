@@ -6,7 +6,7 @@ const router = express.Router();
 
 
 // Create a new topic
-router.post("/create" , createTopic)
+router.post('/create' , createTopic)
 
 // Get all topics
 router.get('/getAll', getAllTopics)

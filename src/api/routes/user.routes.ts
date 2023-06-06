@@ -6,7 +6,7 @@ const router = express.Router();
 
 
 // Create a new user
-router.post("/create" , createUser)
+router.post('/create' , createUser)
 
 // Get all users
 router.get('/getAll', getAllUsers)

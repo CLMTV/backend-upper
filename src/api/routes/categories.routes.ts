@@ -5,7 +5,7 @@ const router = express.Router();
 
 
 // Create a new user
-router.post("/create", createCategory)
+router.post('/create', createCategory)
 
 // Get all users
 router.get('/getAll', getAllCategories)

@@ -5,7 +5,7 @@ import { getAllBadges, createBadge, getBadgeById, updateBadge, deleteBadgeById }
 const router = express.Router();
 
 // Create a new course
-router.post("/create", createBadge)
+router.post('/create', createBadge)
 
 // Get all courses
 router.get('/getAll', getAllBadges)

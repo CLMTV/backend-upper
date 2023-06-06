@@ -6,7 +6,7 @@ const router = express.Router();
 
 
 // Create a new infosBulle
-router.post("/create" , createInfosBulle)
+router.post('/create' , createInfosBulle)
 
 // Get all infosBulles
 router.get('/getAll', getAllInfosBulles)

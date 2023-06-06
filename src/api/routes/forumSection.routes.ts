@@ -6,7 +6,7 @@ const router = express.Router();
 
 
 // Create a new section
-router.post("/create" , createSection)
+router.post('/create' , createSection)
 
 // Get all sections
 router.get('/getAll', getAllSections)
