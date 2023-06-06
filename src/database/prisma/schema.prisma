@@ -17,30 +17,49 @@ model User {
   lastname String @db.VarChar(50)
   email String @unique @db.VarChar(100)
   password String @db.VarChar(255)
-  instrument Instrument[]
-  createdAt DateTime? @default(now())
-  id_plan Int? @db.Integer
-  is_archived Boolean? @default(false)
-  points_forums Int? @db.Integer
-  points_courses Int? @db.Integer
+  createdAt DateTime @default(now())
+  is_archived Boolean @default(false)
+  points_forums Int @default(0)
+  points_courses Int @default(0)
   tiktok_token String? @unique
   tiktok_username String? @unique
 
-  // Many to many
+  // Has one
+  role Role @relation(fields: [roleId], references: [id])
+  roleId Int @db.Integer
+  plan Plan @relation(fields: [planId], references: [id])
+  planId Int @db.Integer
+
+  // Has many
   challenge Challenge[]
   topic Topic[]
   topic_reaction Topic_reaction[]
   message Message[]
   message_reaction Message_reaction[]
   note Note[]
+  instrument Instrument[]
+  ban Ban[]
+  user_course User_course[]
+  user_lesson User_lesson[]
 }
 
 model Role {
   id Int @id @default(autoincrement())
+  name String @db.VarChar(255)
+
+  // Has many
+  user User[]
 }
 
 model Ban {
   id Int @id @default(autoincrement())
+  description String @db.VarChar(255)
+  date_start DateTime @default(now())
+  date_end DateTime?
+
+  // Has one
+  user User @relation(fields: [userId], references: [id])
+  userId Int @db.Integer
 }
 
 // PLAN MODELS
@@ -49,6 +68,9 @@ model Plan {
   name String @db.VarChar(50)
   description String @db.Text
   price Float
+
+  // Has many
+  user User[]
 }
 
 // CHALLENGE MODELS
@@ -61,12 +83,20 @@ model Challenge {
   description String @db.Text
   hashtag String @db.VarChar(255)
 
-  // Many to many
+  // Has many
   user User[]
+  results_snapshot Results_snapshot[]
 }
 
 model Results_snapshot {
   id Int @id @default(autoincrement())
+  tiktok_username String @db.VarChar(255)
+  tiktok_video String @db.VarChar(255)
+  tiktok_likes Int
+
+  // Has one
+  challenge Challenge @relation(fields: [id_challenge], references: [id])
+  id_challenge Int @db.Integer
 }
 
 // CATEGORY MODELS
@@ -74,28 +104,22 @@ model Category {
   id Int @id @default(autoincrement())
   name String @db.VarChar(255)
   content String @db.VarChar(255)
-  instrument Instrument[]
 
+  // Has many
+  instrument Instrument[]
 }
 
 model Instrument {
   id Int @id @default(autoincrement())
-  user User @relation(fields: [userId], references: [id])
-  userId Int
-  category Category @relation(fields: [categoryId], references: [id])
-  categoryId Int
+  name String @db.VarChar(255)
+
+  // Has one
+  category Category @relation(fields: [id_category], references: [id])
+  id_category Int
+
+  // Has many
+  user User[]
 }
-
-
-
-model User_course {
-  id Int @id @default(autoincrement())
-}
-
-model User_lesson {
-  id Int @id @default(autoincrement())
-}
-
 
 // FORUM MODELS
 model Section {
@@ -103,7 +127,7 @@ model Section {
   name String @db.VarChar(255)
   order Int
 
-  // Many
+  // Has many
   topic Topic[]
 }
 
@@ -114,13 +138,13 @@ model Topic {
   like_count Int @default(0)
   flag_count Int @default(0)
 
-  // One
+  // Has one
   author User @relation(fields: [authorId], references: [id])
   authorId Int
-  section Section @relation(fields: [sectionId], references: [id])
-  sectionId Int
+  section Section @relation(fields: [id_section], references: [id])
+  id_section Int
 
-  // Many
+  // Has many
   topic_reaction Topic_reaction[]
   message Message[]
 }
@@ -129,7 +153,7 @@ model Topic_reaction {
   is_liked Boolean @default(false)
   is_flagged Boolean @default(false)
 
-  // One
+  // Has one
   user User @relation(fields: [userId], references: [id])
   userId Int
   topic Topic @relation(fields: [topicId], references: [id])
@@ -145,13 +169,13 @@ model Message {
   like_count Int @default(0)
   flag_count Int @default(0)
 
-  // One
+  // Has one
   author User @relation(fields: [authorId], references: [id])
   authorId Int
   topic Topic @relation(fields: [topicId], references: [id])
   topicId Int
 
-  // Many
+  // Has many
   message_reaction Message_reaction[]
 }
 
@@ -159,7 +183,7 @@ model Message_reaction {
   is_liked Boolean @default(false)
   is_flagged Boolean @default(false)
 
-  // One
+  // Has one
   user User @relation(fields: [userId], references: [id])
   userId Int
   message Message @relation(fields: [messageId], references: [id])
@@ -168,63 +192,54 @@ model Message_reaction {
   @@id([userId, messageId])
 }
 
-// OTHER MODELS
-model Infos_bulle {
-  id Int @id @default(autoincrement())
-  name String  @db.VarChar(255)
-  icon String @db.Text
-  content  String @db.Text
-  date_start DateTime
-  date_end DateTime
-}
-
 // COURSE MODELS
 model Course {
   id Int @id @default(autoincrement())
   name String  @db.VarChar(255)
-  description String
+  description String @db.Text
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  // Many to many
+  // Has many
   lesson Lesson[]
   badge Badge[]
   note Note[]
+  user_course User_course[]
 }
 
 model Lesson {
   id Int @id @default(autoincrement())
-  content String
+  content String @db.Text
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   order Int
   points Int
 
-  // One to many
-  courseId Int
+  // Has one
   course Course @relation(fields: [courseId], references: [id])
-
-  videoId Int
+  courseId Int
   video Video @relation(fields: [videoId], references: [id])
+  videoId Int
 
-  // Many to many
+  // Has many
   media Media[]
   note Note[]
+  user_lesson User_lesson[]
 }
 
 model Media {
   id Int @id @default(autoincrement())
   file String // CHANGER AVEC FILE => lire doc Prisma
 
-  // Many to many
+  // Has many
   lesson Lesson[]
 }
 
 model Video {
   id Int @id @default(autoincrement())
-  link String
+  link String @db.VarChar(255)
 
-  // Many to many
+  // Has many
   lesson Lesson[]
   timestamp Timestamp[]
 }
@@ -232,11 +247,12 @@ model Video {
 model Timestamp {
   id Int @id @default(autoincrement())
   name String @db.VarChar(50)
-  description String
+  description String @db.Text
   value String @db.VarChar(50)
 
-  // Many to many
-  video Video[]
+  // Has One
+  video Video @relation(fields: [videoId], references: [id])
+  videoId Int
 }
 
 model Badge {
@@ -244,9 +260,9 @@ model Badge {
   name String @db.VarChar(255)
   description String @db.VarChar(255)
   points Int
-  display_img String
+  display_img String @db.Text
 
-  // Many to many
+  // Has many
   course Course[]
 }
 
@@ -262,4 +278,39 @@ model Note {
   content String @db.Text
 
   @@id([userId, courseId, lessonId])
+}
+
+model User_course {
+  completion_status Int @default(0)
+  is_favorite Boolean @default(false)
+
+  // Has one
+  user User @relation(fields: [userId], references: [id])
+  userId Int
+  course Course @relation(fields: [courseId], references: [id])
+  courseId Int
+
+  @@id([userId, courseId])
+}
+
+model User_lesson {
+  completion_status Int @default(0)
+
+  // Has one
+  user User @relation(fields: [userId], references: [id])
+  userId Int
+  lesson Lesson @relation(fields: [lessonId], references: [id])
+  lessonId Int
+
+  @@id([userId, lessonId])
+}
+
+// OTHER MODELS
+model Infos_bulle {
+  id Int @id @default(autoincrement())
+  name String  @db.VarChar(255)
+  icon String @db.Text
+  content  String @db.Text
+  date_start DateTime
+  date_end DateTime
 }
