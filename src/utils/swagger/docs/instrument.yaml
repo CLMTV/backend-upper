@@ -1,0 +1,94 @@
+openapi: "3.0.0"
+info:
+  title: "Instrument API"
+  version: "1.0.0"
+tags:
+  - name: "Instruments"
+paths:
+  "/instrument/create":
+    post:
+      tags:
+        - "Instruments"
+      description: "Create a new instrument"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: "object"
+              required:
+                - "name"
+              properties:
+                name:
+                  type: "string"
+      responses:
+        201:
+          description: "Returns the created instrument"
+        400:
+          description: "Returns an error message"
+  "/instrument/getAll":
+    get:
+      tags:
+        - "Instruments"
+      description: "Get all instruments"
+      responses:
+        200:
+          description: "Returns all instruments"
+        400:
+          description: "Returns an error message"
+  "/instrument/getById/{id}":
+    get:
+      tags:
+        - "Instruments"
+      description: "Get instrument by id"
+      parameters:
+        - name: "id"
+          in: "query"
+          required: true
+          schema:
+            type: "number"
+      responses:
+        200:
+          description: "Returns a single instrument"
+        400:
+          description: "Returns an error message"
+  "/instrument/update/{id}":
+    patch:
+      tags:
+        - "Instruments"
+      description: "Update instrument"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: "object"
+              required:
+                - "id"
+                - "name"
+              properties:
+                id:
+                  type: "number"
+                name:
+                  type: "string"
+      responses:
+        200:
+          description: "Returns the updated instrument"
+        400:
+          description: "Returns an error message"
+  "/instrument/deleteById/{id}":
+    delete:
+      tags:
+        - "Instruments"
+      description: "Delete instrument by id"
+      parameters:
+        - name: "id"
+          in: "query"
+          required: true
+          schema:
+            type: "number"
+      responses:
+        200:
+          description: "Returns a success message"
+        400:
+          description: "Returns an error message"

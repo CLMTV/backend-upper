@@ -1,0 +1,91 @@
+openapi: '3.0.0'
+info:
+  title: 'Category API'
+  version: '1.0.0'
+tags:
+  - name: 'Categories'
+paths:
+  /category/create:
+    post:
+      tags:
+        - 'Categories'
+      summary: Create a new category
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+      responses:
+        '201':
+          description: Category created
+        '400':
+          description: Bad request
+  /category/getAll:
+    get:
+      tags:
+        - 'Categories'
+      summary: Get all categories
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Bad request
+  /category/getById/{id}:
+    get:
+      tags:
+        - 'Categories'
+      summary: Get category by id
+      parameters:
+        - in: query
+          name: id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Bad request
+  /category/update/{id}:
+    patch:
+      tags:
+        - 'Categories'
+      summary: Update category
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                name:
+                  type: string
+                content:
+                  type: string
+      responses:
+        '200':
+          description: Category updated
+        '400':
+          description: Bad request
+  /category/deleteById/{id}:
+    delete:
+      tags:
+        - 'Categories'
+      summary: Delete category by id
+      parameters:
+        - in: query
+          name: id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: Category deleted
+        '400':
+          description: Bad request

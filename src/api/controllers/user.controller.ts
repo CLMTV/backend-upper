@@ -1,6 +1,7 @@
 import {Request, Response} from 'express';
 
-const {PrismaClient} = require('@prisma/client');
+import {PrismaClient} from '@prisma/client';
+
 const prisma = new PrismaClient();
 
 
@@ -13,8 +14,8 @@ const getAllUsers = async (req: Request, res: Response) => {
     }
 }
 
-const getUserById = async (req: Request, res: Response) => {
-    const {id} = req.body
+const getUserById = async (req: Request<{ id: number }>, res: Response) => {
+    const {id} = req.params
     try {
         const user = await prisma.user.findUnique({
             where: {
@@ -44,21 +45,21 @@ const createUser = async (req: Request, res: Response) => {
 }
 
 const updateUser = async (req: Request, res: Response) => {
-    const {id, firstname, lastname, email, password} = req.body || {};
-
+    const {firstname, lastname, email} = req.body || {};
+    const {id} = req.params
     if (!id) {
         return res.status(400).json({error: 'id is required'});
     }
     try {
+        const parsedId = parseInt(id, 10);
         const updateUser = await prisma.user.update({
             where: {
-                id: id
+                id: parsedId
             },
             data: {
                 firstname: firstname,
                 lastname: lastname,
                 email: email,
-                password: password
             }
         })
         res.status(200).json(updateUser);
@@ -70,11 +71,12 @@ const updateUser = async (req: Request, res: Response) => {
 
 // DELETE USER BY ID
 const deleteUserById = async (req: Request, res: Response) => {
-    const {id} = req.body
+    const {id} = req.params
     try {
+        const parsedId = parseInt(id, 10);
         const deleteUser = await prisma.user.delete({
             where: {
-                id: id
+                id: parsedId
             }
         });
         res.status(200).json(deleteUser);
