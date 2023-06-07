@@ -1,15 +1,15 @@
 openapi: '3.0.0'
 info:
-  title: 'Lesson API'
+  title: 'Role API'
   version: '1.0.0'
 tags:
-  - name: 'Lesson'
+  - name: 'Role'
 paths:
-  /lesson/create:
+  /role/create:
     post:
       tags:
-        - 'Lesson'
-      summary: Create a new lesson
+        - 'Role'
+      summary: Create a new role
       requestBody:
         required: true
         content:
@@ -17,38 +17,30 @@ paths:
             schema:
               type: object
               properties:
-                content:
+                name:
                   type: string
-                order:
-                  type: integer
-                points:
-                  type: integer
-                courseId:
-                  type: integer
-                videoId:
-                  type: integer
       responses:
         '201':
-          description: Lesson created
+          description: Role created
         '400':
           description: Bad request
-  /lesson/getAll:
+  /role/getAll:
     get:
       tags:
-        - 'Lesson'
-      summary: Get all lessons
+        - 'Role'
+      summary: Get all roles
       responses:
         '200':
           description: Successful operation
         '400':
           description: Bad request
-  /lesson/getById/{id}:
+  /role/getById:
     get:
       tags:
-        - 'Lesson'
-      summary: Get lesson by id
+        - 'Role'
+      summary: Get role by id
       parameters:
-        - in: path
+        - in: query
           name: id
           schema:
             type: integer
@@ -58,11 +50,11 @@ paths:
           description: Successful operation
         '400':
           description: Bad request
-  /lesson/update:
+  /role/update:
     patch:
       tags:
-        - 'Lesson'
-      summary: Update lesson
+        - 'Role'
+      summary: Update role
       requestBody:
         required: true
         content:
@@ -72,30 +64,26 @@ paths:
               properties:
                 id:
                   type: integer
-                content:
+                name:
                   type: string
-                order:
-                  type: integer
-                points:
-                  type: integer
       responses:
         '200':
-          description: Lesson updated
+          description: Role updated
         '400':
           description: Bad request
-  /lesson/deleteById/{id}:
+  /role/deleteById:
     delete:
       tags:
-        - 'Lesson'
-      summary: Delete lesson by id
+        - 'Role'
+      summary: Delete role by id
       parameters:
-        - in: path
+        - in: query
           name: id
           schema:
             type: integer
           required: true
       responses:
         '200':
-          description: Lesson deleted
+          description: Role deleted
         '400':
           description: Bad request
