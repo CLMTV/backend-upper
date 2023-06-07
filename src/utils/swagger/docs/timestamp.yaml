@@ -1,0 +1,99 @@
+openapi: '3.0.0'
+info:
+  title: 'Timestamp API'
+  version: '1.0.0'
+tags:
+  - name: 'Timestamp'
+paths:
+  /timestamp/create:
+    post:
+      tags:
+        - 'Timestamp'
+      summary: Create a new timestamp
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+                value:
+                  type: string
+                videoId:
+                  type: integer
+      responses:
+        '201':
+          description: Timestamp created
+        '400':
+          description: Bad request
+  /timestamp/getAll:
+    get:
+      tags:
+        - 'Timestamp'
+      summary: Get all timestamps
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Bad request
+  /timestamp/getById/{id}:
+    get:
+      tags:
+        - 'Timestamp'
+      summary: Get timestamp by id
+      parameters:
+        - in: query
+          name: id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Bad request
+  /timestamp/update/{id}:
+    patch:
+      tags:
+        - 'Timestamp'
+      summary: Update timestamp
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                name:
+                  type: string
+                description:
+                  type: string
+                value:
+                  type: string
+      responses:
+        '200':
+          description: Timestamp updated
+        '400':
+          description: Bad request
+  /timestamp/deleteById/{id}:
+    delete:
+      tags:
+        - 'Timestamp'
+      summary: Delete timestamp by id
+      parameters:
+        - in: query
+          name: id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: Timestamp deleted
+        '400':
+          description: Bad request
