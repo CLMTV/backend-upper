@@ -1,0 +1,93 @@
+openapi: '3.0.0'
+info:
+  title: 'Course API'
+  version: '1.0.0'
+tags:
+  - name: 'Course'
+paths:
+  /course/create:
+    post:
+      tags:
+        - 'Course'
+      summary: Create a new course
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+      responses:
+        '201':
+          description: Course created
+        '400':
+          description: Bad request
+  /course/getAll:
+    get:
+      tags:
+        - 'Course'
+      summary: Get all courses
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Bad request
+  /course/getById/{id}:
+    get:
+      tags:
+        - 'Course'
+      summary: Get course by id
+      parameters:
+        - in: query
+          name: id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Bad request
+  /course/update/{id}:
+    patch:
+      tags:
+        - 'Course'
+      summary: Update course
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                name:
+                  type: string
+                description:
+                  type: string
+      responses:
+        '200':
+          description: Course updated
+        '400':
+          description: Bad request
+  /course/deleteById/{id}:
+    delete:
+      tags:
+        - 'Course'
+      summary: Delete cours by id
+      parameters:
+        - in: query
+          name: id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: course deleted
+        '400':
+          description: Bad request

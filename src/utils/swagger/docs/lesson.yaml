@@ -1,0 +1,101 @@
+openapi: '3.0.0'
+info:
+  title: 'Lesson API'
+  version: '1.0.0'
+tags:
+  - name: 'Lesson'
+paths:
+  /lesson/create:
+    post:
+      tags:
+        - 'Lesson'
+      summary: Create a new lesson
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                content:
+                  type: string
+                order:
+                  type: integer
+                points:
+                  type: integer
+                courseId:
+                  type: integer
+                videoId:
+                  type: integer
+      responses:
+        '201':
+          description: Lesson created
+        '400':
+          description: Bad request
+  /lesson/getAll:
+    get:
+      tags:
+        - 'Lesson'
+      summary: Get all lessons
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Bad request
+  /lesson/getById/{id}:
+    get:
+      tags:
+        - 'Lesson'
+      summary: Get lesson by id
+      parameters:
+        - in: query
+          name: id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Bad request
+  /lesson/update/{id}:
+    patch:
+      tags:
+        - 'Lesson'
+      summary: Update lesson
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                content:
+                  type: string
+                order:
+                  type: integer
+                points:
+                  type: integer
+      responses:
+        '200':
+          description: Lesson updated
+        '400':
+          description: Bad request
+  /lesson/deleteById/{id}:
+    delete:
+      tags:
+        - 'Lesson'
+      summary: Delete lesson by id
+      parameters:
+        - in: query
+          name: id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: Lesson deleted
+        '400':
+          description: Bad request

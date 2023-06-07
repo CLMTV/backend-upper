@@ -13,7 +13,7 @@ const getAllCourses = async (req: Request, res: Response) => {
 }
 
 const getCourseById = async (req: Request, res: Response) => {
-    const {id} = req.body
+    const {id} = req.params
     try {
         const course = await prisma.course.findUnique({
             where: {
@@ -42,14 +42,16 @@ const createCourse = async (req: Request, res: Response) => {
 }
 
 const updateCourse = async (req: Request, res: Response) => {
-    const {id, name, description} = req.body || {};
+    const {name, description} = req.body || {};
+     const {id} = req.params;
     if (!id) {
         return res.status(400).json({error: 'id is required'});
     }
     try {
+        const parsedId = parseInt(id, 10);
         const updateCourse = await prisma.course.update({
             where: {
-                id: id
+                id: parsedId
             },
             data: {
                 name: name,
@@ -64,11 +66,12 @@ const updateCourse = async (req: Request, res: Response) => {
 
 
 const deleteCourseById = async (req: Request, res: Response) => {
-    const {id} = req.body
+    const {id} = req.params
     try {
+        const parsedId = parseInt(id, 10);
         const deleteCourse = await prisma.course.delete({
             where: {
-                id: id
+                id: parsedId
             }
         });
         res.status(200).json(deleteCourse);
