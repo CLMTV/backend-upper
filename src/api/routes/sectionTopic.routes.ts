@@ -1,5 +1,5 @@
 import express from 'express';
-import {createTopic, getAllTopics, getTopicById, deleteTopicById} from "../controllers/forumTopic.controller";
+import {createTopic, getAllUserTopics, getAllSectionTopics, getTopicById, deleteTopicById} from "../controllers/sectionTopic.controller";
 
 // Variables
 const router = express.Router();
@@ -8,8 +8,11 @@ const router = express.Router();
 // Create a new topic
 router.post("/create" , createTopic)
 
-// Get all topics
-router.get('/getAll', getAllTopics)
+// Get all topics by user
+router.get('/getByUser/:id', getAllUserTopics)
+
+// Get all topics by section
+router.get('/getByUser/:id', getAllSectionTopics)
 
 // Get topic by id
 router.get('/getById/:id', getTopicById)

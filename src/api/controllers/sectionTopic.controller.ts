@@ -13,6 +13,55 @@ const getAllTopics = async (req: Request, res: Response) => {
     }
 }
 
+const getAllUserTopics = async (req: Request, res: Response) => {
+    const {id} = req.params
+
+    if (!id) {
+        return res.status(400).json({
+            error: 'user id is required'
+        });
+    }
+    try {
+        const parsedId = parseInt(id, 10);
+        const topics = await prisma.topic.findMany({
+            where: {
+                authorId: parsedId
+            },
+            include: {
+                topic_reaction: true
+            }
+        });
+        res.status(200).json(topics);
+    } catch (err: any) {
+        res.status(400).json({error: err.message});
+    }
+}
+
+const getAllSectionTopics = async (req: Request, res: Response) => {
+    const {id} = req.params
+
+    if (!id) {
+        return res.status(400).json({
+            error: 'section id is required'
+        });
+    }
+    try {
+        const parsedId = parseInt(id, 10);
+        const topics = await prisma.topic.findMany({
+            where: {
+                sectionId: parsedId
+            },
+            include: {
+                topic_reaction: true
+            }
+        });
+        res.status(200).json(topics);
+    } catch (err: any) {
+        res.status(400).json({error: err.message});
+    }
+}
+
+
 const getTopicById = async (req: Request, res: Response) => {
     const {id} = req.params
 
@@ -24,6 +73,9 @@ const getTopicById = async (req: Request, res: Response) => {
         const topic = await prisma.topic.findUnique({
             where: {
                 id: parsedId
+            },
+            include: {
+                topic_reaction: true
             }
         });
         res.status(200).json(topic);
@@ -65,4 +117,4 @@ const deleteTopicById = async (req: Request, res: Response) => {
     }
 }
 
-export {getAllTopics, createTopic, getTopicById, deleteTopicById}
+export {getAllUserTopics, getAllSectionTopics, createTopic, getTopicById, deleteTopicById}

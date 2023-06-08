@@ -4,15 +4,6 @@ const {PrismaClient} = require('@prisma/client');
 const prisma = new PrismaClient();
 
 
-const getAllTopicReactions = async (req: Request, res: Response) => {
-    try {
-        const topic_reactions = await prisma.topic_reaction.findMany();
-        res.status(200).json(topic_reactions);
-    } catch (err: any) {
-        res.status(400).json({error: err.message});
-    }
-}
-
 const getTopicReactionById = async (req: Request, res: Response) => {
     const {id} = req.params;
 
@@ -34,11 +25,11 @@ const getTopicReactionById = async (req: Request, res: Response) => {
 
 const createTopicReaction = async (req: Request, res: Response) => {
     console.log(req.body)
-    const {isLiked, isFlagged, userId, messageId} = req.body || {};
+    const {is_liked, is_flagged, userId, messageId} = req.body || {};
 
     try {
         const topic_reaction = await prisma.topic_reaction.create({
-            data: {isLiked, isFlagged, userId, messageId},
+            data: {is_liked, is_flagged, userId, messageId},
         });
         res.status(201).json(topic_reaction);
     } catch (err: any) {
@@ -47,7 +38,7 @@ const createTopicReaction = async (req: Request, res: Response) => {
 }
 
 const updateTopicReaction = async (req: Request, res: Response) => {
-    const {isLiked, isFlagged, userId, messageId} = req.body || {};
+    const {is_liked, is_flagged, userId, messageId} = req.body || {};
     const {id} = req.params
 
     if (!id) {
@@ -60,8 +51,8 @@ const updateTopicReaction = async (req: Request, res: Response) => {
                 id: parsedId
             },
             data: {
-                isLiked: isLiked,
-                isFlagged: isFlagged,
+                is_liked: is_liked,
+                is_flagged: is_flagged,
                 userId: userId,
                 messageId: messageId
             }
@@ -92,4 +83,4 @@ const deleteTopicReactionById = async (req: Request, res: Response) => {
     }
 }
 
-export {getAllTopicReactions, createTopicReaction, getTopicReactionById, updateTopicReaction, deleteTopicReactionById}
+export {createTopicReaction, getTopicReactionById, updateTopicReaction, deleteTopicReactionById}
