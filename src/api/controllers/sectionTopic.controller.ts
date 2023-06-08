@@ -4,15 +4,6 @@ const {PrismaClient} = require('@prisma/client');
 const prisma = new PrismaClient();
 
 
-const getAllTopics = async (req: Request, res: Response) => {
-    try {
-        const topics = await prisma.topic.findMany();
-        res.status(200).json(topics);
-    } catch (err: any) {
-        res.status(400).json({error: err.message});
-    }
-}
-
 const getAllUserTopics = async (req: Request, res: Response) => {
     const {id} = req.params
 
