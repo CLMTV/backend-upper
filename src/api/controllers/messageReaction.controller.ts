@@ -4,15 +4,6 @@ const {PrismaClient} = require('@prisma/client');
 const prisma = new PrismaClient();
 
 
-const getAllMessageReactions = async (req: Request, res: Response) => {
-    try {
-        const message_reactions = await prisma.message_reaction.findMany();
-        res.status(200).json(message_reactions);
-    } catch (err: any) {
-        res.status(400).json({error: err.message});
-    }
-}
-
 const getMessageReactionById = async (req: Request, res: Response) => {
     const {id} = req.params
 
@@ -34,11 +25,11 @@ const getMessageReactionById = async (req: Request, res: Response) => {
 
 const createMessageReaction = async (req: Request, res: Response) => {
     console.log(req.body)
-    const {isLiked, isFlagged, userId, messageId} = req.body || {};
+    const {is_liked, is_flagged, userId, messageId} = req.body || {};
 
     try {
         const message_reaction = await prisma.message_reaction.create({
-            data: {isLiked, isFlagged, userId, messageId},
+            data: {is_liked, is_flagged, userId, messageId},
         });
         res.status(201).json(message_reaction);
     } catch (err: any) {
@@ -92,4 +83,4 @@ const deleteMessageReactionById = async (req: Request, res: Response) => {
     }
 }
 
-export {getAllMessageReactions, createMessageReaction, getMessageReactionById, updateMessageReaction, deleteMessageReactionById}
+export {createMessageReaction, getMessageReactionById, updateMessageReaction, deleteMessageReactionById}

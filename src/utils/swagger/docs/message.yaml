@@ -1,0 +1,94 @@
+openapi: '3.0.0'
+info:
+  title: 'Forum message API'
+  version: '1.0.0'
+tags:
+  - name: 'Forum message'
+paths:
+  /message/create:
+    post:
+      tags:
+        - 'Forum message'
+      summary: Create a new message
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                content:
+                  type: string
+                authorId:
+                  type: integer
+                topicId:
+                  type: integer
+      responses:
+        '201':
+          description: Forum message created
+        '400':
+          description: Bad request
+  /message/getById/{id}:
+    get:
+      tags:
+        - 'Forum message'
+      summary: Get message by id
+      parameters:
+        - in: query
+          name: id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Bad request
+  /message/getByUser/{id}:
+    get:
+      tags:
+        - 'Forum message'
+      summary: Get message by id
+      parameters:
+        - in: query
+          name: messageId
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Bad request
+  /message/getByTopic/{id}:
+    get:
+      tags:
+        - 'Forum message'
+      summary: Get message by id
+      parameters:
+        - in: query
+          name: sectionId
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Bad request
+  /message/deleteById/{id}:
+    delete:
+      tags:
+        - 'Forum message'
+      summary: Delete message by id
+      parameters:
+        - in: query
+          name: id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: Forum message deleted
+        '400':
+          description: Bad request

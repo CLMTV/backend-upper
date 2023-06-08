@@ -1,0 +1,94 @@
+openapi: '3.0.0'
+info:
+  title: 'Forum topic API'
+  version: '1.0.0'
+tags:
+  - name: 'Forum topic'
+paths:
+  /topic/create:
+    post:
+      tags:
+        - 'Forum topic'
+      summary: Create a new topic
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                authorId:
+                  type: integer
+                sectionId:
+                  type: integer
+      responses:
+        '201':
+          description: Forum topic created
+        '400':
+          description: Bad request
+  /topic/getById/{id}:
+    get:
+      tags:
+        - 'Forum topic'
+      summary: Get topic by id
+      parameters:
+        - in: query
+          name: id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Bad request
+  /topic/getByUser/{id}:
+    get:
+      tags:
+        - 'Forum topic'
+      summary: Get topic by id
+      parameters:
+        - in: query
+          name: topicId
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Bad request
+  /topic/getBySection/{id}:
+    get:
+      tags:
+        - 'Forum topic'
+      summary: Get topic by id
+      parameters:
+        - in: query
+          name: sectionId
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Bad request
+  /topic/deleteById/{id}:
+    delete:
+      tags:
+        - 'Forum topic'
+      summary: Delete topic by id
+      parameters:
+        - in: query
+          name: id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: Forum topic deleted
+        '400':
+          description: Bad request
