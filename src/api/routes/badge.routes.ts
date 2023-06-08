@@ -11,7 +11,7 @@ router.post("/create", createBadge)
 router.get('/getAll', getAllBadges)
 
 // Get course by id
-router.get('/getById/:is', getBadgeById)
+router.get('/getById/:id', getBadgeById)
 
 // Update course
 router.patch('/update/:id', updateBadge)
