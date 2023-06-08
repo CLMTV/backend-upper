@@ -25,6 +25,7 @@ model User {
   points_courses Int? @db.Integer
   tiktok_token String? @unique
   tiktok_username String? @unique
+  // refreshTokens RefreshToken[]
 
   // Many to many
   challenge Challenge[]
@@ -34,6 +35,18 @@ model User {
   message_reaction Message_reaction[]
   note Note[]
 }
+
+// The new RefreshToken model:
+// model RefreshToken {
+//   id Int @id @default(autoincrement())
+//   user User @relation(fields: [userId], references: [id])
+//   userId Int
+//   token String @unique
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+//   expiresAt DateTime
+// }
+
 
 model Role {
   id Int @id @default(autoincrement())

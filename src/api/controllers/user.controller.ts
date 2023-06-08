@@ -1,8 +1,38 @@
 import {Request, Response} from 'express';
 
 import {PrismaClient} from '@prisma/client';
-
+import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt';
 const prisma = new PrismaClient();
+
+
+const loginUser = async (req: Request, res: Response) => {
+    const {email, password} = req.body;
+    if (!email || !password) {
+        return res.status(400).json({error: 'Email and password are required'});
+    }
+    try {
+        const user = await prisma.user.findUnique({
+            where: {
+                email: email
+            }
+        });
+        if (!user) {
+            return res.status(400).json({error: 'Invalid email or password'});
+        }
+
+        const validPassword = await bcrypt.compare(password, user.password);
+        if (!validPassword) {
+            return res.status(400).json({error: 'Invalid email or password'});
+        }
+
+        const token = jwt.sign({userId: user.id},'secretkey');
+        res.json({token});
+    } catch (err: any) {
+        res.status(400).json({error: err.message});
+    }
+}
+
 
 
 const getAllUsers = async (req: Request, res: Response) => {
@@ -14,12 +44,13 @@ const getAllUsers = async (req: Request, res: Response) => {
     }
 }
 
-const getUserById = async (req: Request<{ id: number }>, res: Response) => {
+const getUserById = async (req: Request, res: Response) => {
     const {id} = req.params
     try {
+        const parsedId = parseInt(id, 10);
         const user = await prisma.user.findUnique({
             where: {
-                id: id
+                id: parsedId
             }
         });
         res.status(200).json(user);
@@ -35,8 +66,11 @@ const createUser = async (req: Request, res: Response) => {
         return res.status(400).json({error: 'firstname, lastname, email and password are required'});
     }
     try {
+        const saltRounds = 10;
+        const hashedPassword = await bcrypt.hash(password, saltRounds);
+
         const user = await prisma.user.create({
-            data: {firstname, lastname, email, password},
+            data: {firstname, lastname, email, password: hashedPassword},
         });
         res.status(201).json(user);
     } catch (err: any) {
@@ -85,4 +119,4 @@ const deleteUserById = async (req: Request, res: Response) => {
     }
 }
 
-export {getAllUsers, createUser, getUserById, updateUser, deleteUserById}
+export {loginUser, getAllUsers, createUser, getUserById, updateUser, deleteUserById}
