@@ -5,7 +5,7 @@ import { getAllLesson, createLesson, getLessonById, updateLesson, deleteLessonBy
 const router = express.Router();
 
 // Create a new course
-router.post('/create', createLesson)
+router.post("/create", createLesson)
 
 // Get all courses
 router.get('/getAll', getAllLesson)

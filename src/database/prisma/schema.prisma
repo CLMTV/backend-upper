@@ -23,6 +23,7 @@ model User {
   points_courses Int @default(0)
   tiktok_token String? @unique
   tiktok_username String? @unique
+  // refreshTokens RefreshToken[]
 
   // Has one
   role Role @relation(fields: [roleId], references: [id])
@@ -42,6 +43,18 @@ model User {
   user_course User_course[]
   user_lesson User_lesson[]
 }
+
+// The new RefreshToken model:
+// model RefreshToken {
+//   id Int @id @default(autoincrement())
+//   user User @relation(fields: [userId], references: [id])
+//   userId Int
+//   token String @unique
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+//   expiresAt DateTime
+// }
+
 
 model Role {
   id Int @id @default(autoincrement())
@@ -141,8 +154,8 @@ model Topic {
   // Has one
   author User @relation(fields: [authorId], references: [id])
   authorId Int
-  section Section @relation(fields: [id_section], references: [id])
-  id_section Int
+  section Section @relation(fields: [sectionId], references: [id])
+  sectionId Int
 
   // Has many
   topic_reaction Topic_reaction[]
