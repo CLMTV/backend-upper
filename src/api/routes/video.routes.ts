@@ -11,12 +11,12 @@ router.post("/create", createVideo)
 router.get('/getAll', getAllVideos)
 
 // Get course by id
-router.get('/getById', getVideoById)
+router.get('/getById/:id', getVideoById)
 
 // Update course
-router.patch('/update', updateVideo)
+router.patch('/update/:id', updateVideo)
 
 // Delete course
-router.delete('/deleteById', deleteVideoById)
+router.delete('/deleteById/:id', deleteVideoById)
 
 export default router;

@@ -40,7 +40,7 @@ paths:
         - 'Video'
       summary: Get video by id
       parameters:
-        - in: query
+        - in: path
           name: id
           schema:
             type: integer
@@ -55,6 +55,12 @@ paths:
       tags:
         - 'Video'
       summary: Update video
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
       requestBody:
         required: true
         content:
@@ -77,7 +83,7 @@ paths:
         - 'Video'
       summary: Delete video by id
       parameters:
-        - in: query
+        - in: path
           name: id
           schema:
             type: integer

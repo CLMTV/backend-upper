@@ -15,9 +15,10 @@ const getAllVideos = async (req: Request, res: Response) => {
 const getVideoById = async (req: Request, res: Response) => {
     const {id} = req.params
     try {
+        const parsedId = parseInt(id, 10);
         const video = await prisma.video.findUnique({
             where: {
-                id: id
+                id: parsedId
             }
         });
         res.status(200).json(video);
@@ -70,7 +71,7 @@ const deleteVideoById = async (req: Request, res: Response) => {
         const parsedId = parseInt(id, 10);
         const deleteVideo = await prisma.video.delete({
             where: {
-                id: id
+                id: parsedId
             }
         });
         res.status(200).json(deleteVideo);

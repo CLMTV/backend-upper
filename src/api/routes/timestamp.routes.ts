@@ -11,12 +11,12 @@ router.post("/create", createTimestamp)
 router.get('/getAll', getAllTimestamp)
 
 // Get course by id
-router.get('/getById', getTimestampById)
+router.get('/getById/:id', getTimestampById)
 
 // Update course
-router.patch('/update', updateTimestamp)
+router.patch('/update/:id', updateTimestamp)
 
 // Delete course
-router.delete('/deleteById', deleteTimestampById)
+router.delete('/deleteById/:id', deleteTimestampById)
 
 export default router;

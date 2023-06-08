@@ -32,13 +32,13 @@ const getInstrumentById = async (req: Request, res: Response) => {
 
 // CREATE INSTRUMENT
 const createInstrument = async (req: Request, res: Response) => {
-    const {name} = req.body || {};
+    const {name, id_category} = req.body || {};
     if (!name) {
         return res.status(400).json({error: 'name is required'});
     }
     try {
         const instrument = await prisma.instrument.create({
-            data: name,
+            data: {name, id_category},
         });
         res.status(201).json(instrument);
     } catch (err: any) {

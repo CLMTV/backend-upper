@@ -1,94 +1,97 @@
-openapi: "3.0.0"
+openapi: '3.0.0'
 info:
-  title: "Instrument API"
-  version: "1.0.0"
+  title: 'Instrument API'
+  version: '1.0.0'
 tags:
-  - name: "Instruments"
+  - name: 'Instrument'
 paths:
-  "/instrument/create":
+  /instrument/create:
     post:
       tags:
-        - "Instruments"
-      description: "Create a new instrument"
+        - 'Instrument'
+      summary: Create a new instrument
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              type: "object"
-              required:
-                - "name"
+              type: object
               properties:
                 name:
-                  type: "string"
+                  type: string
+                id_category:
+                  type: integer
       responses:
-        201:
-          description: "Returns the created instrument"
-        400:
-          description: "Returns an error message"
-  "/instrument/getAll":
+        '201':
+          description: Instrument created
+        '400':
+          description: Bad request
+  /instrument/getAll:
     get:
       tags:
-        - "Instruments"
-      description: "Get all instruments"
+        - 'Instrument'
+      summary: Get all instruments
       responses:
-        200:
-          description: "Returns all instruments"
-        400:
-          description: "Returns an error message"
-  "/instrument/getById/{id}":
+        '200':
+          description: Successful operation
+        '400':
+          description: Bad request
+  /instrument/getById/{id}:
     get:
       tags:
-        - "Instruments"
-      description: "Get instrument by id"
+        - 'Instrument'
+      summary: Get instrument by id
       parameters:
-        - name: "id"
-          in: "query"
-          required: true
+        - in: path
+          name: id
           schema:
-            type: "number"
+            type: integer
+          required: true
       responses:
-        200:
-          description: "Returns a single instrument"
-        400:
-          description: "Returns an error message"
-  "/instrument/update/{id}":
+        '200':
+          description: Successful operation
+        '400':
+          description: Bad request
+  /instrument/update/{id}:
     patch:
       tags:
-        - "Instruments"
-      description: "Update instrument"
+        - 'Instrument'
+      summary: Update instrument
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              type: "object"
-              required:
-                - "id"
-                - "name"
+              type: object
               properties:
-                id:
-                  type: "number"
                 name:
-                  type: "string"
+                  type: string
+                id_category:
+                  type: integer
       responses:
-        200:
-          description: "Returns the updated instrument"
-        400:
-          description: "Returns an error message"
-  "/instrument/deleteById/{id}":
+        '200':
+          description: Instrument updated
+        '400':
+          description: Bad request
+  /instrument/deleteById/{id}:
     delete:
       tags:
-        - "Instruments"
-      description: "Delete instrument by id"
+        - 'Instrument'
+      summary: Delete instrument by id
       parameters:
-        - name: "id"
-          in: "query"
-          required: true
+        - in: path
+          name: id
           schema:
-            type: "number"
+            type: integer
+          required: true
       responses:
-        200:
-          description: "Returns a success message"
-        400:
-          description: "Returns an error message"
+        '200':
+          description: Instrument deleted
+        '400':
+          description: Bad request

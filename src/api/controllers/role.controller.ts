@@ -33,16 +33,14 @@ const getRoleById = async (req: Request, res: Response) => {
 }
 
 const createRole = async (req: Request, res: Response) => {
-    console.log(req.body)
-    const {name} = req.body || {};
-
+    const { name } = req.body || {};    
     try {
         const role = await prisma.role.create({
-            data: {name},
+            data: { name },
         });
         res.status(201).json(role);
     } catch (err: any) {
-        res.status(400).json({error: err.message});
+        res.status(400).json({ error: err.message });
     }
 }
 
