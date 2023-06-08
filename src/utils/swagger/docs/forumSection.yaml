@@ -1,0 +1,93 @@
+openapi: '3.0.0'
+info:
+  title: 'Forum section API'
+  version: '1.0.0'
+tags:
+  - name: 'Forum section'
+paths:
+  /section/create:
+    post:
+      tags:
+        - 'Forum section'
+      summary: Create a new section
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                order:
+                  type: integer
+      responses:
+        '201':
+          description: Forum section created
+        '400':
+          description: Bad request
+  /section/getAll:
+    get:
+      tags:
+        - 'Forum section'
+      summary: Get all sections
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Bad request
+  /section/getById/{id}:
+    get:
+      tags:
+        - 'Forum section'
+      summary: Get section by id
+      parameters:
+        - in: query
+          name: id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Bad request
+  /section/update/{id}:
+    patch:
+      tags:
+        - 'Forum section'
+      summary: Update section
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                name:
+                  type: string
+                order:
+                  type: integer
+      responses:
+        '200':
+          description: Forum section updated
+        '400':
+          description: Bad request
+  /section/deleteById/{id}:
+    delete:
+      tags:
+        - 'Forum section'
+      summary: Delete section by id
+      parameters:
+        - in: query
+          name: id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: Forum section deleted
+        '400':
+          description: Bad request

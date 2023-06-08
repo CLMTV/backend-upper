@@ -1,0 +1,91 @@
+openapi: '3.0.0'
+info:
+  title: 'Message reaction API'
+  version: '1.0.0'
+tags:
+  - name: 'Message reaction'
+paths:
+  /messageReaction/create:
+    post:
+      tags:
+        - 'Message reaction'
+      summary: Create a new messageReaction
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                is_liked:
+                  type: boolean
+                is_flagged:
+                  type: boolean
+                userId:
+                  type: integer
+                messageId:
+                  type: integer
+      responses:
+        '201':
+          description: Message reaction created
+        '400':
+          description: Bad request
+  /messageReaction/getById/{id}:
+    get:
+      tags:
+        - 'Message reaction'
+      summary: Get messageReaction by id
+      parameters:
+        - in: query
+          name: id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Bad request
+  /messageReaction/update/{id}:
+    patch:
+      tags:
+        - 'Message reaction'
+      summary: Update messageReaction
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                is_liked:
+                  type: boolean
+                is_flagged:
+                  type: boolean
+                userId:
+                  type: integer
+                messageId:
+                  type: integer
+      responses:
+        '200':
+          description: Message reaction updated
+        '400':
+          description: Bad request
+  /messageReaction/deleteById/{id}:
+    delete:
+      tags:
+        - 'Message reaction'
+      summary: Delete messageReaction by id
+      parameters:
+        - in: query
+          name: id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: Message reaction deleted
+        '400':
+          description: Bad request

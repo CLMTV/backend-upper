@@ -1,0 +1,91 @@
+openapi: '3.0.0'
+info:
+  title: 'Topic reaction API'
+  version: '1.0.0'
+tags:
+  - name: 'Topic reaction'
+paths:
+  /topicReaction/create:
+    post:
+      tags:
+        - 'Topic reaction'
+      summary: Create a new topicReaction
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                is_liked:
+                  type: boolean
+                is_flagged:
+                  type: boolean
+                userId:
+                  type: integer
+                messageId:
+                  type: integer
+      responses:
+        '201':
+          description: Topic reaction created
+        '400':
+          description: Bad request
+  /topicReaction/getById/{id}:
+    get:
+      tags:
+        - 'Topic reaction'
+      summary: Get topicReaction by id
+      parameters:
+        - in: query
+          name: id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Bad request
+  /topicReaction/update/{id}:
+    patch:
+      tags:
+        - 'Topic reaction'
+      summary: Update topicReaction
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                is_liked:
+                  type: boolean
+                is_flagged:
+                  type: boolean
+                userId:
+                  type: integer
+                messageId:
+                  type: integer
+      responses:
+        '200':
+          description: Topic reaction updated
+        '400':
+          description: Bad request
+  /topicReaction/deleteById/{id}:
+    delete:
+      tags:
+        - 'Topic reaction'
+      summary: Delete topicReaction by id
+      parameters:
+        - in: query
+          name: id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: Topic reaction deleted
+        '400':
+          description: Bad request
