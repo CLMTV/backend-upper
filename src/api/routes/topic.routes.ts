@@ -1,5 +1,5 @@
 import express from 'express';
-import {createTopic, getAllUserTopics, getAllSectionTopics, getTopicById, deleteTopicById} from "../controllers/sectionTopic.controller";
+import {createTopic, getAllUserTopics, getAllSectionTopics, getTopicById, deleteTopicById} from "../controllers/topic.controller";
 
 // Variables
 const router = express.Router();
