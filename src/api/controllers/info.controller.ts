@@ -4,7 +4,7 @@ const {PrismaClient} = require('@prisma/client');
 const prisma = new PrismaClient();
 
 
-const getAllInfosBulles = async (req: Request, res: Response) => {
+const getAllInfos = async (req: Request, res: Response) => {
     try {
         const infos_bulles = await prisma.infos_bulle.findMany();
         res.status(200).json(infos_bulles);
@@ -13,7 +13,7 @@ const getAllInfosBulles = async (req: Request, res: Response) => {
     }
 }
 
-const getInfosBulleById = async (req: Request, res: Response) => {
+const getInfoById = async (req: Request, res: Response) => {
     const {id} = req.params
 
     if (!id) {
@@ -32,7 +32,7 @@ const getInfosBulleById = async (req: Request, res: Response) => {
     }
 }
 
-const createInfosBulle = async (req: Request, res: Response) => {
+const createInfo = async (req: Request, res: Response) => {
     console.log(req.body)
     let {name, icon, content, date_start, date_end} = req.body || {};
 
@@ -49,7 +49,7 @@ const createInfosBulle = async (req: Request, res: Response) => {
     }
 }
 
-const updateInfosBulle = async (req: Request, res: Response) => {
+const updateInfo = async (req: Request, res: Response) => {
     const {name, icon, content, date_start, date_end} = req.body || {};
     const {id} = req.params
 
@@ -58,7 +58,7 @@ const updateInfosBulle = async (req: Request, res: Response) => {
     }
     try {
         const parsedId = parseInt(id, 10);
-        const updateInfosBulle = await prisma.infos_bulle.update({
+        const updateInfo = await prisma.infos_bulle.update({
             where: {
                 id: parsedId
             },
@@ -70,14 +70,14 @@ const updateInfosBulle = async (req: Request, res: Response) => {
                 date_end: date_end
             }
         })
-        res.status(200).json(updateInfosBulle);
+        res.status(200).json(updateInfo);
 
     } catch (err: any) {
         res.status(400).json({error: err.message});
     }
 }
 
-const deleteInfosBulleById = async (req: Request, res: Response) => {
+const deleteInfoById = async (req: Request, res: Response) => {
     const {id} = req.params
 
     if (!id) {
@@ -85,15 +85,15 @@ const deleteInfosBulleById = async (req: Request, res: Response) => {
     }
     try {
         const parsedId = parseInt(id, 10);
-        const deleteInfosBulle = await prisma.infos_bulle.delete({
+        const deleteInfo = await prisma.infos_bulle.delete({
             where: {
                 id: parsedId
             }
         });
-        res.status(200).json(deleteInfosBulle);
+        res.status(200).json(deleteInfo);
     } catch (err: any) {
         res.status(400).json({error: err.message});
     }
 }
 
-export {getAllInfosBulles, createInfosBulle, getInfosBulleById, updateInfosBulle, deleteInfosBulleById}
+export {getAllInfos, createInfo, getInfoById, updateInfo, deleteInfoById}
