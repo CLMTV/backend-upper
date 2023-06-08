@@ -141,8 +141,8 @@ model Topic {
   // Has one
   author User @relation(fields: [authorId], references: [id])
   authorId Int
-  section Section @relation(fields: [id_section], references: [id])
-  id_section Int
+  section Section @relation(fields: [sectionId], references: [id])
+  sectionId Int
 
   // Has many
   topic_reaction Topic_reaction[]
