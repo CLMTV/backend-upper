@@ -15,9 +15,10 @@ const getAllCourses = async (req: Request, res: Response) => {
 const getCourseById = async (req: Request, res: Response) => {
     const {id} = req.params
     try {
+        const parsedId = parseInt(id, 10);
         const course = await prisma.course.findUnique({
             where: {
-                id: id
+                id: parsedId
             }
         });
         res.status(200).json(course);

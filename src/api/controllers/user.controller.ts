@@ -14,12 +14,13 @@ const getAllUsers = async (req: Request, res: Response) => {
     }
 }
 
-const getUserById = async (req: Request<{ id: number }>, res: Response) => {
+const getUserById = async (req: Request<{ id: string }>, res: Response) => {
     const {id} = req.params
     try {
+        const parsedId = parseInt(id, 10);
         const user = await prisma.user.findUnique({
             where: {
-                id: id
+                id: parsedId
             }
         });
         res.status(200).json(user);

@@ -58,11 +58,17 @@ paths:
           description: Successful operation
         '400':
           description: Bad request
-  /lesson/update:
+  /lesson/update{id}:
     patch:
       tags:
         - 'Lesson'
       summary: Update lesson
+       parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
       requestBody:
         required: true
         content:

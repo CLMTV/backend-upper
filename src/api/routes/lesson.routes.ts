@@ -14,7 +14,7 @@ router.get('/getAll', getAllLesson)
 router.get(`/getById/:id`, getLessonById)
 
 // Update course
-router.patch('/update', updateLesson)
+router.patch('/update/:id', updateLesson)
 
 // Delete course
 router.delete(`/deleteById/:id`, deleteLessonById)
