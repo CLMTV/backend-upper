@@ -60,7 +60,7 @@ const getUserById = async (req: Request, res: Response) => {
 }
 
 const createUser = async (req: Request, res: Response) => {
-    const {firstname, lastname, email, password} = req.body || {};
+    const {firstname, lastname, email, password, roleId, planId} = req.body || {};
     if (!email) {
         return res.status(400).json({error: 'firstname, lastname, email and password are required'});
     }
@@ -69,7 +69,7 @@ const createUser = async (req: Request, res: Response) => {
         const hashedPassword = await bcrypt.hash(password, saltRounds);
 
         const user = await prisma.user.create({
-            data: {firstname, lastname, email, password: hashedPassword},
+            data: {firstname, lastname, email, password: hashedPassword, roleId, planId},
         });
         res.status(201).json(user);
     } catch (err: any) {
