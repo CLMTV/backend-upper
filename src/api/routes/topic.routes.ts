@@ -12,7 +12,7 @@ router.post("/create" , createTopic)
 router.get('/getByUser/:id', getAllUserTopics)
 
 // Get all topics by section
-router.get('/getByUser/:id', getAllSectionTopics)
+router.get('/getBySection/:id', getAllSectionTopics)
 
 // Get topic by id
 router.get('/getById/:id', getTopicById)
