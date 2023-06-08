@@ -11,12 +11,12 @@ router.post("/create", createLesson)
 router.get('/getAll', getAllLesson)
 
 // Get course by id
-router.get('/getById', getLessonById)
+router.get(`/getById/:id`, getLessonById)
 
 // Update course
-router.patch('/update', updateLesson)
+router.patch('/update/:id', updateLesson)
 
 // Delete course
-router.delete('/deleteById', deleteLessonById)
+router.delete(`/deleteById/:id`, deleteLessonById)
 
 export default router;

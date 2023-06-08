@@ -1,15 +1,15 @@
 openapi: '3.0.0'
 info:
-  title: 'Instrument API'
+  title: 'Timestamp API'
   version: '1.0.0'
 tags:
-  - name: 'Instrument'
+  - name: 'Timestamp'
 paths:
-  /instrument/create:
+  /timestamp/create:
     post:
       tags:
-        - 'Instrument'
-      summary: Create a new instrument
+        - 'Timestamp'
+      summary: Create a new timestamp
       requestBody:
         required: true
         content:
@@ -19,30 +19,34 @@ paths:
               properties:
                 name:
                   type: string
-                id_category:
+                description:
+                  type: string
+                value:
+                  type: string
+                videoId:
                   type: integer
       responses:
         '201':
-          description: Instrument created
+          description: Timestamp created
         '400':
           description: Bad request
-  /instrument/getAll:
+  /timestamp/getAll:
     get:
       tags:
-        - 'Instrument'
-      summary: Get all instruments
+        - 'Timestamp'
+      summary: Get all timestamps
       responses:
         '200':
           description: Successful operation
         '400':
           description: Bad request
-  /instrument/getById/{id}:
+  /timestamp/getById/{id}:
     get:
       tags:
-        - 'Instrument'
-      summary: Get instrument by id
+        - 'Timestamp'
+      summary: Get timestamp by id
       parameters:
-        - in: path
+        - in: query
           name: id
           schema:
             type: integer
@@ -52,17 +56,11 @@ paths:
           description: Successful operation
         '400':
           description: Bad request
-  /instrument/update/{id}:
+  /timestamp/update/{id}:
     patch:
       tags:
-        - 'Instrument'
-      summary: Update instrument
-      parameters:
-        - in: path
-          name: id
-          schema:
-            type: integer
-          required: true
+        - 'Timestamp'
+      summary: Update timestamp
       requestBody:
         required: true
         content:
@@ -70,28 +68,32 @@ paths:
             schema:
               type: object
               properties:
+                id:
+                  type: integer
                 name:
                   type: string
-                id_category:
-                  type: integer
+                description:
+                  type: string
+                value:
+                  type: string
       responses:
         '200':
-          description: Instrument updated
+          description: Timestamp updated
         '400':
           description: Bad request
-  /instrument/deleteById/{id}:
+  /timestamp/deleteById/{id}:
     delete:
       tags:
-        - 'Instrument'
-      summary: Delete instrument by id
+        - 'Timestamp'
+      summary: Delete timestamp by id
       parameters:
-        - in: path
+        - in: query
           name: id
           schema:
             type: integer
           required: true
       responses:
         '200':
-          description: Instrument deleted
+          description: Timestamp deleted
         '400':
           description: Bad request

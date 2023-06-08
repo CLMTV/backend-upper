@@ -40,7 +40,7 @@ paths:
         - 'Role'
       summary: Get role by id
       parameters:
-        - in: query
+        - in: path
           name: id
           schema:
             type: integer
@@ -55,6 +55,12 @@ paths:
       tags:
         - 'Role'
       summary: Update role
+       parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
       requestBody:
         required: true
         content:
@@ -77,7 +83,7 @@ paths:
         - 'Role'
       summary: Delete role by id
       parameters:
-        - in: query
+        - in: path
           name: id
           schema:
             type: integer

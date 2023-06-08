@@ -11,12 +11,12 @@ router.post("/create", createBadge)
 router.get('/getAll', getAllBadges)
 
 // Get course by id
-router.get('/getById', getBadgeById)
+router.get('/getById/:is', getBadgeById)
 
 // Update course
-router.patch('/update', updateBadge)
+router.patch('/update/:id', updateBadge)
 
 // Delete course
-router.delete('/deleteById', deleteBadgeById)
+router.delete('/deleteById/:id', deleteBadgeById)
 
 export default router;

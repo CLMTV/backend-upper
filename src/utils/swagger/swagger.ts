@@ -26,7 +26,8 @@ const options: swaggerJsDoc.Options = {
         ]
     },
     apis: [
-        '/Users/maximepalmino/Documents/03 - HETIC/Cours/backend-upper/src/utils/swagger/docs/**/*.yaml'
+        // '/Users/maximepalmino/Documents/03 - HETIC/Cours/backend-upper/src/utils/swagger/docs/**/*.yaml',
+        './src/utils/swagger/docs/**/*.yaml', 
     ]
 }
 

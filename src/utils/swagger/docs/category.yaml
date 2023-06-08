@@ -5,7 +5,7 @@ info:
 tags:
   - name: 'Categories'
 paths:
-  /category/create:
+  /categories/create:
     post:
       tags:
         - 'Categories'
@@ -19,12 +19,14 @@ paths:
               properties:
                 name:
                   type: string
+                content:
+                  type: string
       responses:
         '201':
           description: Category created
         '400':
           description: Bad request
-  /category/getAll:
+  /categories/getAll:
     get:
       tags:
         - 'Categories'
@@ -34,13 +36,13 @@ paths:
           description: Successful operation
         '400':
           description: Bad request
-  /category/getById/{id}:
+  /categories/getById/{id}:
     get:
       tags:
         - 'Categories'
       summary: Get category by id
       parameters:
-        - in: query
+        - in: path
           name: id
           schema:
             type: integer
@@ -50,11 +52,17 @@ paths:
           description: Successful operation
         '400':
           description: Bad request
-  /category/update/{id}:
+  /categories/update/{id}:
     patch:
       tags:
         - 'Categories'
       summary: Update category
+       parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
       requestBody:
         required: true
         content:
@@ -73,13 +81,13 @@ paths:
           description: Category updated
         '400':
           description: Bad request
-  /category/deleteById/{id}:
+  /categories/deleteById/{id}:
     delete:
       tags:
         - 'Categories'
       summary: Delete category by id
       parameters:
-        - in: query
+        - in: path
           name: id
           schema:
             type: integer

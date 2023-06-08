@@ -32,13 +32,13 @@ const getCategoryById = async (req: Request, res: Response) => {
 
 // CREATE CATEGORY
 const createCategory = async (req: Request, res: Response) => {
-    const {name} = req.body || {};
+    const {name, content} = req.body || {};
     if (!name) {
         return res.status(400).json({error: 'name is required'});
     }
     try {
         const createCategory = await prisma.category.create({
-            data: name,
+            data: {name, content}
         });
         res.status(201).json(createCategory);
     } catch (err: any) {

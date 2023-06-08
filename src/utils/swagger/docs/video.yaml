@@ -1,15 +1,15 @@
 openapi: '3.0.0'
 info:
-  title: 'Instrument API'
+  title: 'Video API'
   version: '1.0.0'
 tags:
-  - name: 'Instrument'
+  - name: 'Video'
 paths:
-  /instrument/create:
+  /video/create:
     post:
       tags:
-        - 'Instrument'
-      summary: Create a new instrument
+        - 'Video'
+      summary: Create a new video
       requestBody:
         required: true
         content:
@@ -17,30 +17,28 @@ paths:
             schema:
               type: object
               properties:
-                name:
+                link:
                   type: string
-                id_category:
-                  type: integer
       responses:
         '201':
-          description: Instrument created
+          description: Video created
         '400':
           description: Bad request
-  /instrument/getAll:
+  /video/getAll:
     get:
       tags:
-        - 'Instrument'
-      summary: Get all instruments
+        - 'Video'
+      summary: Get all videos
       responses:
         '200':
           description: Successful operation
         '400':
           description: Bad request
-  /instrument/getById/{id}:
+  /video/getById/{id}:
     get:
       tags:
-        - 'Instrument'
-      summary: Get instrument by id
+        - 'Video'
+      summary: Get video by id
       parameters:
         - in: path
           name: id
@@ -52,11 +50,11 @@ paths:
           description: Successful operation
         '400':
           description: Bad request
-  /instrument/update/{id}:
+  /video/update/{id}:
     patch:
       tags:
-        - 'Instrument'
-      summary: Update instrument
+        - 'Video'
+      summary: Update video
       parameters:
         - in: path
           name: id
@@ -70,20 +68,20 @@ paths:
             schema:
               type: object
               properties:
-                name:
-                  type: string
-                id_category:
+                id:
                   type: integer
+                link:
+                  type: string
       responses:
         '200':
-          description: Instrument updated
+          description: Video updated
         '400':
           description: Bad request
-  /instrument/deleteById/{id}:
+  /video/deleteById/{id}:
     delete:
       tags:
-        - 'Instrument'
-      summary: Delete instrument by id
+        - 'Video'
+      summary: Delete video by id
       parameters:
         - in: path
           name: id
@@ -92,6 +90,6 @@ paths:
           required: true
       responses:
         '200':
-          description: Instrument deleted
+          description: Video deleted
         '400':
           description: Bad request

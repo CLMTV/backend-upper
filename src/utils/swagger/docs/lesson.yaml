@@ -1,15 +1,15 @@
 openapi: '3.0.0'
 info:
-  title: 'Instrument API'
+  title: 'Lesson API'
   version: '1.0.0'
 tags:
-  - name: 'Instrument'
+  - name: 'Lesson'
 paths:
-  /instrument/create:
+  /lesson/create:
     post:
       tags:
-        - 'Instrument'
-      summary: Create a new instrument
+        - 'Lesson'
+      summary: Create a new lesson
       requestBody:
         required: true
         content:
@@ -17,30 +17,36 @@ paths:
             schema:
               type: object
               properties:
-                name:
+                content:
                   type: string
-                id_category:
+                order:
+                  type: integer
+                points:
+                  type: integer
+                courseId:
+                  type: integer
+                videoId:
                   type: integer
       responses:
         '201':
-          description: Instrument created
+          description: Lesson created
         '400':
           description: Bad request
-  /instrument/getAll:
+  /lesson/getAll:
     get:
       tags:
-        - 'Instrument'
-      summary: Get all instruments
+        - 'Lesson'
+      summary: Get all lessons
       responses:
         '200':
           description: Successful operation
         '400':
           description: Bad request
-  /instrument/getById/{id}:
+  /lesson/getById/{id}:
     get:
       tags:
-        - 'Instrument'
-      summary: Get instrument by id
+        - 'Lesson'
+      summary: Get lesson by id
       parameters:
         - in: path
           name: id
@@ -52,12 +58,12 @@ paths:
           description: Successful operation
         '400':
           description: Bad request
-  /instrument/update/{id}:
+  /lesson/update{id}:
     patch:
       tags:
-        - 'Instrument'
-      summary: Update instrument
-      parameters:
+        - 'Lesson'
+      summary: Update lesson
+       parameters:
         - in: path
           name: id
           schema:
@@ -70,20 +76,24 @@ paths:
             schema:
               type: object
               properties:
-                name:
+                id:
+                  type: integer
+                content:
                   type: string
-                id_category:
+                order:
+                  type: integer
+                points:
                   type: integer
       responses:
         '200':
-          description: Instrument updated
+          description: Lesson updated
         '400':
           description: Bad request
-  /instrument/deleteById/{id}:
+  /lesson/deleteById/{id}:
     delete:
       tags:
-        - 'Instrument'
-      summary: Delete instrument by id
+        - 'Lesson'
+      summary: Delete lesson by id
       parameters:
         - in: path
           name: id
@@ -92,6 +102,6 @@ paths:
           required: true
       responses:
         '200':
-          description: Instrument deleted
+          description: Lesson deleted
         '400':
           description: Bad request

@@ -13,11 +13,12 @@ const getAllLesson = async (req: Request, res: Response) => {
 }
 
 const getLessonById = async (req: Request, res: Response) => {
-    const {id} = req.body
+    const {id} = req.params;
     try {
+        const parsedId = parseInt(id, 10);
         const lesson = await prisma.lesson.findUnique({
             where: {
-                id: id
+                id: parsedId
             }
         });
         res.status(200).json(lesson);
@@ -42,14 +43,16 @@ const createLesson = async (req: Request, res: Response) => {
 }
 
 const updateLesson = async (req: Request, res: Response) => {
-    const {id, content, order, points} = req.body || {};
+    const {content, order, points} = req.body || {};
+    const {id} = req.params
     if (!id) {
         return res.status(400).json({error: 'id is required'});
     }
     try {
+        const parsedId = parseInt(id, 10);
         const updatelesson = await prisma.lesson.update({
             where: {
-                id: id
+                id: parsedId
             },
             data: {
                 content: content,
@@ -65,11 +68,12 @@ const updateLesson = async (req: Request, res: Response) => {
 
 
 const deleteLessonById = async (req: Request, res: Response) => {
-    const {id} = req.body
+    const {id} = req.params
     try {
+        const parsedId = parseInt(id, 10);
         const deletelesson = await prisma.lesson.delete({
             where: {
-                id: id
+                id: parsedId
             }
         });
         res.status(200).json(deletelesson);

@@ -12,11 +12,11 @@ import lessonRoutes from './lesson.routes';
 import bagdeRoutes from './badge.routes';
 import instrumentsRoutes from './instrument.routes';
 import roleRoutes from './role.routes';
+import videoRoutes from './video.routes';
+import timestampRoutes from './timestamp.routes'
 const app = express();
 
 const router = express.Router();
-
-
 
 router.use('/user', userRoutes);
 router.use('/categories', categoriesRoutes);
@@ -26,10 +26,12 @@ router.use('/topicReaction', topicReactionRoutes);
 router.use('/message', messageRoutes);
 router.use('/messageReaction', messageReactionRoutes);
 router.use('/info', infoRoutes);
-router.use('/courses', coursesRoutes);
-router.use('/lessons', lessonRoutes);
+router.use('/course', coursesRoutes);
+router.use('/lesson', lessonRoutes);
 router.use('/badge', bagdeRoutes);
 router.use('/instrument', instrumentsRoutes);
 router.use('/role', roleRoutes);
+router.use('/video', videoRoutes);
+router.use('/timestamp', timestampRoutes);
 
 export default router;

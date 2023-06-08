@@ -1,15 +1,15 @@
 openapi: '3.0.0'
 info:
-  title: 'Instrument API'
+  title: 'Course API'
   version: '1.0.0'
 tags:
-  - name: 'Instrument'
+  - name: 'Course'
 paths:
-  /instrument/create:
+  /course/create:
     post:
       tags:
-        - 'Instrument'
-      summary: Create a new instrument
+        - 'Course'
+      summary: Create a new course
       requestBody:
         required: true
         content:
@@ -19,28 +19,28 @@ paths:
               properties:
                 name:
                   type: string
-                id_category:
-                  type: integer
+                description:
+                  type: string
       responses:
         '201':
-          description: Instrument created
+          description: Course created
         '400':
           description: Bad request
-  /instrument/getAll:
+  /course/getAll:
     get:
       tags:
-        - 'Instrument'
-      summary: Get all instruments
+        - 'Course'
+      summary: Get all courses
       responses:
         '200':
           description: Successful operation
         '400':
           description: Bad request
-  /instrument/getById/{id}:
+  /course/getById/{id}:
     get:
       tags:
-        - 'Instrument'
-      summary: Get instrument by id
+        - 'Course'
+      summary: Get course by id
       parameters:
         - in: path
           name: id
@@ -52,11 +52,11 @@ paths:
           description: Successful operation
         '400':
           description: Bad request
-  /instrument/update/{id}:
+  /course/update/{id}:
     patch:
       tags:
-        - 'Instrument'
-      summary: Update instrument
+        - 'Course'
+      summary: Update course
       parameters:
         - in: path
           name: id
@@ -72,18 +72,18 @@ paths:
               properties:
                 name:
                   type: string
-                id_category:
-                  type: integer
+                description:
+                  type: string
       responses:
         '200':
-          description: Instrument updated
+          description: Course updated
         '400':
           description: Bad request
-  /instrument/deleteById/{id}:
+  /course/deleteById/{id}:
     delete:
       tags:
-        - 'Instrument'
-      summary: Delete instrument by id
+        - 'Course'
+      summary: Delete cours by id
       parameters:
         - in: path
           name: id
@@ -92,6 +92,6 @@ paths:
           required: true
       responses:
         '200':
-          description: Instrument deleted
+          description: course deleted
         '400':
           description: Bad request
