@@ -156,7 +156,7 @@ model Topic {
   authorId Int
   section Section @relation(fields: [sectionId], references: [id])
   sectionId Int
-  deleted Boolean @default(false)
+  archived Boolean @default(false)
 
   // Has many
   topic_reaction Topic_reaction[]

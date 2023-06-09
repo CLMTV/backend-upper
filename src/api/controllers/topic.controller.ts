@@ -101,7 +101,7 @@ const deleteTopicById = async (req: Request, res: Response) => {
                 id: parsedId
             },
             data: {
-                deleted: true
+                archived: true
             }
         })
         res.status(200).json(updateTopic);
