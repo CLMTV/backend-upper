@@ -1,0 +1,117 @@
+openapi: '3.0.0'
+info:
+  title: 'Challenge API'
+  version: '1.0.0'
+tags:
+  - name: 'Challenge'
+paths:
+  /challenge/create:
+    post:
+      tags:
+        - 'Challenge'
+      summary: Create a new challenge
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                date_start:
+                  type: string
+                  format: string
+                date_end:
+                  type: string
+                  format: string
+                description:
+                  type: string
+                hashtag:
+                  type: string
+                instrumentId:
+                  type: integer
+      responses:
+        '201':
+          description: Challenge created
+        '400':
+          description: Bad request
+  /challenge/getAll:
+    get:
+      tags:
+        - 'Challenge'
+      summary: Get all challenges
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Bad request
+  /challenge/getById/{id}:
+    get:
+      tags:
+        - 'Challenge'
+      summary: Get challenge by id
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Bad request
+  /challenge/update/{id}:
+    patch:
+      tags:
+        - 'Challenge'
+      summary: Update challenge
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                date_start:
+                  type: string
+                  format: string
+                date_end:
+                  type: string
+                  format: string
+                description:
+                  type: string
+                hashtag:
+                  type: string
+                instrumentId:
+                  type: integer
+      responses:
+        '200':
+          description: Challenge updated
+        '400':
+          description: Bad request
+  /challenge/deleteById/{id}:
+    delete:
+      tags:
+        - 'Challenge'
+      summary: Delete challenge by id
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: Challenge deleted
+        '400':
+          description: Bad request
