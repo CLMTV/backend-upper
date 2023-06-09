@@ -88,18 +88,20 @@ const createMessage = async (req: Request, res: Response) => {
 
 const deleteMessageById = async (req: Request, res: Response) => {
     const {id} = req.params
-
     if (!id) {
         return res.status(400).json({error: 'id is required'});
     }
     try {
         const parsedId = parseInt(id, 10);
-        const deleteMessage = await prisma.message.delete({
+        const updateMessage = await prisma.message.update({
             where: {
                 id: parsedId
+            },
+            data: {
+                deleted: true
             }
-        });
-        res.status(200).json(deleteMessage);
+        })
+        res.status(200).json(updateMessage);
     } catch (err: any) {
         res.status(400).json({error: err.message});
     }

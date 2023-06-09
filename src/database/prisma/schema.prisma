@@ -156,6 +156,7 @@ model Topic {
   authorId Int
   section Section @relation(fields: [sectionId], references: [id])
   sectionId Int
+  deleted Boolean @default(false)
 
   // Has many
   topic_reaction Topic_reaction[]
@@ -181,6 +182,7 @@ model Message {
   content String @db.Text
   like_count Int @default(0)
   flag_count Int @default(0)
+  deleted Boolean @default(false)
 
   // Has one
   author User @relation(fields: [authorId], references: [id])
