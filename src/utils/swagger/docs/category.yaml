@@ -57,7 +57,7 @@ paths:
       tags:
         - 'Categories'
       summary: Update category
-       parameters:
+      parameters:
         - in: path
           name: id
           schema:

@@ -1,15 +1,15 @@
 openapi: '3.0.0'
 info:
-  title: 'Role API'
+  title: 'Plan API'
   version: '1.0.0'
 tags:
-  - name: 'Role'
+  - name: 'Plan'
 paths:
-  /role/create:
+  /plan/create:
     post:
       tags:
-        - 'Role'
-      summary: Create a new role
+        - 'Plan'
+      summary: Create a new plan
       requestBody:
         required: true
         content:
@@ -19,26 +19,30 @@ paths:
               properties:
                 name:
                   type: string
+                description:
+                  type: string
+                price:
+                  type: number
       responses:
         '201':
-          description: Role created
+          description: Plan created
         '400':
           description: Bad request
-  /role/getAll:
+  /plan/getAll:
     get:
       tags:
-        - 'Role'
-      summary: Get all roles
+        - 'Plan'
+      summary: Get all plans
       responses:
         '200':
           description: Successful operation
         '400':
           description: Bad request
-  /role/getById/{id}:
+  /plan/getById/{id}:
     get:
       tags:
-        - 'Role'
-      summary: Get role by id
+        - 'Plan'
+      summary: Get plan by id
       parameters:
         - in: path
           name: id
@@ -50,11 +54,11 @@ paths:
           description: Successful operation
         '400':
           description: Bad request
-  /role/update/{id}:
+  /plan/update/{id}:
     patch:
       tags:
-        - 'Role'
-      summary: Update role
+        - 'Plan'
+      summary: Update plan
       parameters:
         - in: path
           name: id
@@ -68,20 +72,22 @@ paths:
             schema:
               type: object
               properties:
-                id:
-                  type: integer
                 name:
                   type: string
+                description:
+                  type: string
+                price:
+                  type: number
       responses:
         '200':
-          description: Role updated
+          description: Plan updated
         '400':
           description: Bad request
-  /role/deleteById/{id}:
+  /plan/deleteById/{id}:
     delete:
       tags:
-        - 'Role'
-      summary: Delete role by id
+        - 'Plan'
+      summary: Delete plan by id
       parameters:
         - in: path
           name: id
@@ -90,6 +96,6 @@ paths:
           required: true
       responses:
         '200':
-          description: Role deleted
+          description: Plan deleted
         '400':
           description: Bad request

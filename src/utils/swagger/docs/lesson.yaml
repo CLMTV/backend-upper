@@ -58,7 +58,7 @@ paths:
           description: Successful operation
         '400':
           description: Bad request
-  /lesson/update{id}:
+  /lesson/update/{id}:
     patch:
       tags:
         - 'Lesson'

@@ -33,15 +33,22 @@ const getInfoById = async (req: Request, res: Response) => {
 }
 
 const createInfo = async (req: Request, res: Response) => {
-    console.log(req.body)
     let {name, icon, content, date_start, date_end} = req.body || {};
+    // Fonction pour formater la date au format "AAAA-MM-JJ"
+    const formatDate = (dateString: string) => {
+        const [day, month, year] = dateString.split('/');
+        const formattedDate = `20${year}-${month}-${day}`;
+        console.log("FORMAT",formattedDate);
+        return formattedDate;
+    };
 
-    date_start = new Date(date_start);
-    date_end = new Date(date_end);
-
+    // formatage
+    let date_debut = new Date(formatDate(date_start));
+    let date_fin = new Date(formatDate(date_end));
+    
     try {
         const infos_bulle = await prisma.infos_bulle.create({
-            data: {name, icon, content, date_start, date_end},
+            data: {name, icon, content, date_start: date_debut, date_end: date_fin},
         });
         res.status(201).json(infos_bulle);
     } catch (err: any) {
