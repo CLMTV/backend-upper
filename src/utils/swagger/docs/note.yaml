@@ -1,0 +1,176 @@
+openapi: '3.0.0'
+info:
+  title: 'Note API'
+  version: '1.0.0'
+tags:
+  - name: 'Note'
+paths:
+  /note/create:
+    post:
+      tags:
+        - 'Note'
+      summary: Create a new note
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: integer
+                courseId:
+                  type: integer
+                lessonId:
+                  type: integer
+                content:
+                  type: string
+      responses:
+        '201':
+          description: Note created
+        '400':
+          description: Bad request
+  /note/getAll:
+    get:
+      tags:
+        - 'Note'
+      summary: Get all notes
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Bad request
+  /note/getById/{id}:
+    get:
+      tags:
+        - 'Note'
+      summary: Get note by id
+      parameters:
+        - in: path
+          name: userId
+          schema:
+            type: integer
+          required: true
+        - in: path
+          name: courseId
+          schema:
+            type: integer
+          required: true
+        - in: path
+          name: lessonId
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Bad request
+  /note/getById/{userId}/{courseId}:
+    get:
+      tags:
+        - 'Note'
+      summary: Get note by user and course
+      parameters:
+        - in: path
+          name: userId
+          schema:
+            type: integer
+          required: true
+        - in: path
+          name: courseId
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Bad request
+  /note/getById/{userId}/{courseId}/{lessonId}:
+    get:
+      tags:
+        - 'Note'
+      summary: Get note by user, course, and lesson
+      parameters:
+        - in: path
+          name: userId
+          schema:
+            type: integer
+          required: true
+        - in: path
+          name: courseId
+          schema:
+            type: integer
+          required: true
+        - in: path
+          name: lessonId
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Bad request
+  /note/update/{userId}/{courseId}/{lessonId}:
+    patch:
+      tags:
+        - 'Note'
+      summary: Update note
+      parameters:
+        - in: path
+          name: userId
+          schema:
+            type: integer
+          required: true
+        - in: path
+          name: courseId
+          schema:
+            type: integer
+          required: true
+        - in: path
+          name: lessonId
+          schema:
+            type: integer
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                content:
+                  type: string
+      responses:
+        '200':
+          description: Note updated
+        '400':
+          description: Bad request
+  /note/deleteById/{userId}/{courseId}/{lessonId}:
+    delete:
+      tags:
+        - 'Note'
+      summary: Delete note by user, course, and lesson
+      parameters:
+        - in: path
+          name: userId
+          schema:
+            type: integer
+          required: true
+        - in: path
+          name: courseId
+          schema:
+            type: integer
+          required: true
+        - in: path
+          name: lessonId
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: Note deleted
+        '400':
+          description: Bad request
