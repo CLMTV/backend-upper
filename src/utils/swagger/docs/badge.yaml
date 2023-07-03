@@ -1,15 +1,15 @@
 openapi: '3.0.0'
 info:
-  title: 'Lesson API'
+  title: 'Badge API'
   version: '1.0.0'
 tags:
-  - name: 'Lesson'
+  - name: 'Badge'
 paths:
-  /lesson/create:
+  /badge/create:
     post:
       tags:
-        - 'Lesson'
-      summary: Create a new lesson
+        - 'Badge'
+      summary: Create a new badge
       requestBody:
         required: true
         content:
@@ -17,36 +17,34 @@ paths:
             schema:
               type: object
               properties:
-                content:
+                name:
                   type: string
-                order:
-                  type: integer
+                description:
+                  type: string
                 points:
                   type: integer
-                courseId:
-                  type: integer
-                videoId:
-                  type: integer
+                display_img:
+                  type: string
       responses:
         '201':
-          description: Lesson created
+          description: Badge created
         '400':
           description: Bad request
-  /lesson/getAll:
+  /badge/getAll:
     get:
       tags:
-        - 'Lesson'
-      summary: Get all lessons
+        - 'Badge'
+      summary: Get all badges
       responses:
         '200':
           description: Successful operation
         '400':
           description: Bad request
-  /lesson/getById/{id}:
+  /badge/getById/{id}:
     get:
       tags:
-        - 'Lesson'
-      summary: Get lesson by id
+        - 'Badge'
+      summary: Get badge by id
       parameters:
         - in: path
           name: id
@@ -58,11 +56,11 @@ paths:
           description: Successful operation
         '400':
           description: Bad request
-  /lesson/update/{id}:
+  /badge/update/{id}:
     patch:
       tags:
-        - 'Lesson'
-      summary: Update lesson
+        - 'Badge'
+      summary: Update badge
       parameters:
         - in: path
           name: id
@@ -76,24 +74,24 @@ paths:
             schema:
               type: object
               properties:
-                id:
-                  type: integer
-                content:
+                name:
                   type: string
-                order:
-                  type: integer
+                description:
+                  type: string
                 points:
                   type: integer
+                display_img:
+                  type: string
       responses:
         '200':
-          description: Lesson updated
+          description: Badge updated
         '400':
           description: Bad request
-  /lesson/deleteById/{id}:
+  /badge/deleteById/{id}:
     delete:
       tags:
-        - 'Lesson'
-      summary: Delete lesson by id
+        - 'Badge'
+      summary: Delete badge by id
       parameters:
         - in: path
           name: id
@@ -102,6 +100,6 @@ paths:
           required: true
       responses:
         '200':
-          description: Lesson deleted
+          description: Badge deleted
         '400':
           description: Bad request

@@ -1,15 +1,15 @@
 openapi: '3.0.0'
 info:
-  title: 'Lesson API'
+  title: 'Challenge API'
   version: '1.0.0'
 tags:
-  - name: 'Lesson'
+  - name: 'Challenge'
 paths:
-  /lesson/create:
+  /challenge/create:
     post:
       tags:
-        - 'Lesson'
-      summary: Create a new lesson
+        - 'Challenge'
+      summary: Create a new challenge
       requestBody:
         required: true
         content:
@@ -17,36 +17,40 @@ paths:
             schema:
               type: object
               properties:
-                content:
+                name:
                   type: string
-                order:
-                  type: integer
-                points:
-                  type: integer
-                courseId:
-                  type: integer
-                videoId:
+                date_start:
+                  type: string
+                  format: string
+                date_end:
+                  type: string
+                  format: string
+                description:
+                  type: string
+                hashtag:
+                  type: string
+                instrumentId:
                   type: integer
       responses:
         '201':
-          description: Lesson created
+          description: Challenge created
         '400':
           description: Bad request
-  /lesson/getAll:
+  /challenge/getAll:
     get:
       tags:
-        - 'Lesson'
-      summary: Get all lessons
+        - 'Challenge'
+      summary: Get all challenges
       responses:
         '200':
           description: Successful operation
         '400':
           description: Bad request
-  /lesson/getById/{id}:
+  /challenge/getById/{id}:
     get:
       tags:
-        - 'Lesson'
-      summary: Get lesson by id
+        - 'Challenge'
+      summary: Get challenge by id
       parameters:
         - in: path
           name: id
@@ -58,11 +62,11 @@ paths:
           description: Successful operation
         '400':
           description: Bad request
-  /lesson/update/{id}:
+  /challenge/update/{id}:
     patch:
       tags:
-        - 'Lesson'
-      summary: Update lesson
+        - 'Challenge'
+      summary: Update challenge
       parameters:
         - in: path
           name: id
@@ -76,24 +80,30 @@ paths:
             schema:
               type: object
               properties:
-                id:
-                  type: integer
-                content:
+                name:
                   type: string
-                order:
-                  type: integer
-                points:
+                date_start:
+                  type: string
+                  format: string
+                date_end:
+                  type: string
+                  format: string
+                description:
+                  type: string
+                hashtag:
+                  type: string
+                instrumentId:
                   type: integer
       responses:
         '200':
-          description: Lesson updated
+          description: Challenge updated
         '400':
           description: Bad request
-  /lesson/deleteById/{id}:
+  /challenge/deleteById/{id}:
     delete:
       tags:
-        - 'Lesson'
-      summary: Delete lesson by id
+        - 'Challenge'
+      summary: Delete challenge by id
       parameters:
         - in: path
           name: id
@@ -102,6 +112,6 @@ paths:
           required: true
       responses:
         '200':
-          description: Lesson deleted
+          description: Challenge deleted
         '400':
           description: Bad request

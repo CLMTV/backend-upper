@@ -5,8 +5,8 @@ const prisma = new PrismaClient();
 
 const getAllBadges = async (req: Request, res: Response) => {
     try {
-        const bagde = await prisma.bagde.findMany();
-        res.status(200).json(bagde);
+        const badge = await prisma.badge.findMany();
+        res.status(200).json(badge);
     } catch (err: any) {
         res.status(400).json({error: err.message});
     }
@@ -15,12 +15,12 @@ const getAllBadges = async (req: Request, res: Response) => {
 const getBadgeById = async (req: Request, res: Response) => {
     const {id} = req.body
     try {
-        const bagde = await prisma.bagde.findUnique({
+        const badge = await prisma.badge.findUnique({
             where: {
                 id: id
             }
         });
-        res.status(200).json(bagde);
+        res.status(200).json(badge);
     } catch (err: any) {
         res.status(400).json({error: err.message});
     }
@@ -32,10 +32,12 @@ const createBadge = async (req: Request, res: Response) => {
         return res.status(400).json({error: 'name is required'});
     }
     try {
-        const bagde = await prisma.bagde.create({
+        console.log(prisma.badge);
+        
+        const badge = await prisma.badge.create({
             data: {name, description, points, display_img, course},
         });
-        res.status(201).json(bagde);
+        res.status(201).json(badge);
     } catch (err: any) {
         res.status(400).json({error: err.message});
     }
@@ -47,7 +49,7 @@ const updateBadge = async (req: Request, res: Response) => {
         return res.status(400).json({error: 'id is required'});
     }
     try {
-        const updatebagde = await prisma.bagde.update({
+        const updatebadge = await prisma.badge.update({
             where: {
                 id: id
             },
@@ -58,7 +60,7 @@ const updateBadge = async (req: Request, res: Response) => {
                 display_img: display_img
             }
         })
-        res.status(200).json(updatebagde);
+        res.status(200).json(updatebadge);
     } catch (err: any) {
         res.status(400).json({error: err.message});
     }
@@ -68,12 +70,12 @@ const updateBadge = async (req: Request, res: Response) => {
 const deleteBadgeById = async (req: Request, res: Response) => {
     const {id} = req.body
     try {
-        const deletebagde = await prisma.bagde.delete({
+        const deletebadge = await prisma.badge.delete({
             where: {
                 id: id
             }
         });
-        res.status(200).json(deletebagde);
+        res.status(200).json(deletebadge);
     } catch (err: any) {
         res.status(400).json({error: err.message});
     }

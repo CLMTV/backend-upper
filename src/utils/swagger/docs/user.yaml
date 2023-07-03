@@ -23,6 +23,10 @@ paths:
                   type: string
                 password:
                   type: string
+                roleId:
+                  type: string
+                planId:
+                  type: string
       responses:
         '201':
           description: Returns the created user

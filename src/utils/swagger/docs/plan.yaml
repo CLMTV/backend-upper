@@ -1,15 +1,15 @@
 openapi: '3.0.0'
 info:
-  title: 'Lesson API'
+  title: 'Plan API'
   version: '1.0.0'
 tags:
-  - name: 'Lesson'
+  - name: 'Plan'
 paths:
-  /lesson/create:
+  /plan/create:
     post:
       tags:
-        - 'Lesson'
-      summary: Create a new lesson
+        - 'Plan'
+      summary: Create a new plan
       requestBody:
         required: true
         content:
@@ -17,36 +17,32 @@ paths:
             schema:
               type: object
               properties:
-                content:
+                name:
                   type: string
-                order:
-                  type: integer
-                points:
-                  type: integer
-                courseId:
-                  type: integer
-                videoId:
-                  type: integer
+                description:
+                  type: string
+                price:
+                  type: number
       responses:
         '201':
-          description: Lesson created
+          description: Plan created
         '400':
           description: Bad request
-  /lesson/getAll:
+  /plan/getAll:
     get:
       tags:
-        - 'Lesson'
-      summary: Get all lessons
+        - 'Plan'
+      summary: Get all plans
       responses:
         '200':
           description: Successful operation
         '400':
           description: Bad request
-  /lesson/getById/{id}:
+  /plan/getById/{id}:
     get:
       tags:
-        - 'Lesson'
-      summary: Get lesson by id
+        - 'Plan'
+      summary: Get plan by id
       parameters:
         - in: path
           name: id
@@ -58,11 +54,11 @@ paths:
           description: Successful operation
         '400':
           description: Bad request
-  /lesson/update/{id}:
+  /plan/update/{id}:
     patch:
       tags:
-        - 'Lesson'
-      summary: Update lesson
+        - 'Plan'
+      summary: Update plan
       parameters:
         - in: path
           name: id
@@ -76,24 +72,22 @@ paths:
             schema:
               type: object
               properties:
-                id:
-                  type: integer
-                content:
+                name:
                   type: string
-                order:
-                  type: integer
-                points:
-                  type: integer
+                description:
+                  type: string
+                price:
+                  type: number
       responses:
         '200':
-          description: Lesson updated
+          description: Plan updated
         '400':
           description: Bad request
-  /lesson/deleteById/{id}:
+  /plan/deleteById/{id}:
     delete:
       tags:
-        - 'Lesson'
-      summary: Delete lesson by id
+        - 'Plan'
+      summary: Delete plan by id
       parameters:
         - in: path
           name: id
@@ -102,6 +96,6 @@ paths:
           required: true
       responses:
         '200':
-          description: Lesson deleted
+          description: Plan deleted
         '400':
           description: Bad request

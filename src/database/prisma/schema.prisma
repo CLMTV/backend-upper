@@ -90,12 +90,14 @@ model Plan {
 model Challenge {
   id Int @id @default(autoincrement())
   name String @db.VarChar(255)
-  id_instrument Int
   date_start DateTime
   date_end DateTime
   description String @db.Text
   hashtag String @db.VarChar(255)
 
+   // Has one
+  instrument Instrument @relation(fields: [id_instrument], references: [id])
+  id_instrument Int @db.Integer
   // Has many
   user User[]
   results_snapshot Results_snapshot[]
@@ -132,6 +134,7 @@ model Instrument {
 
   // Has many
   user User[]
+  challenge Challenge[]
 }
 
 // FORUM MODELS

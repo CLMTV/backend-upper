@@ -3,17 +3,16 @@ import {Request, Response} from 'express';
 const {PrismaClient} = require('@prisma/client');
 const prisma = new PrismaClient();
 
-
-const getAllSections = async (req: Request, res: Response) => {
+const getAllPlan = async (req: Request, res: Response) => {
     try {
-        const sections = await prisma.section.findMany();
-        res.status(200).json(sections);
+        const plan = await prisma.plan.findMany();
+        res.status(200).json(plan);
     } catch (err: any) {
         res.status(400).json({error: err.message});
     }
 }
 
-const getSectionById = async (req: Request, res: Response) => {
+const getPlanById = async (req: Request, res: Response) => {
     const {id} = req.params
 
     if (!id) {
@@ -21,32 +20,32 @@ const getSectionById = async (req: Request, res: Response) => {
     }
     try {
         const parsedId = parseInt(id, 10);
-        const section = await prisma.section.findUnique({
+        const plan = await prisma.plan.findUnique({
             where: {
                 id: parsedId
             }
         });
-        res.status(200).json(section);
+        res.status(200).json(plan);
     } catch (err: any) {
         res.status(400).json({error: err.message});
     }
 }
 
-const createSection = async (req: Request, res: Response) => {
-    const {name, order} = req.body || {};
+const createPlan = async (req: Request, res: Response) => {
+    const {name, description, price} = req.body || {};
 
     try {
-        const section = await prisma.section.create({
-            data: {name, order},
+        const plan = await prisma.plan.create({
+            data: {name, description, price},
         });
-        res.status(201).json(section);
+        res.status(201).json(plan);
     } catch (err: any) {
         res.status(400).json({error: err.message});
     }
 }
 
-const updateSection = async (req: Request, res: Response) => {
-    const {name, order} = req.body || {};
+const updatePlan = async (req: Request, res: Response) => {
+    const {name, description, price} = req.body || {};
     const {id} = req.params
 
     if (!id) {
@@ -54,23 +53,24 @@ const updateSection = async (req: Request, res: Response) => {
     }
     try {
         const parsedId = parseInt(id, 10);
-        const updateSection = await prisma.section.update({
+        const updateplan = await prisma.plan.update({
             where: {
                 id: parsedId
             },
             data: {
                 name: name,
-                order: order
+                description: description, 
+                price: price
             }
         })
-        res.status(200).json(updateSection);
+        res.status(200).json(updateplan);
 
     } catch (err: any) {
         res.status(400).json({error: err.message});
     }
 }
 
-const deleteSectionById = async (req: Request, res: Response) => {
+const deletePlanById = async (req: Request, res: Response) => {
     const {id} = req.params
 
     if (!id) {
@@ -78,15 +78,15 @@ const deleteSectionById = async (req: Request, res: Response) => {
     }
     try {
         const parsedId = parseInt(id, 10);
-        const deleteSection = await prisma.section.delete({
+        const deleteplan = await prisma.plan.delete({
             where: {
                 id: parsedId
             }
         });
-        res.status(200).json(deleteSection);
+        res.status(200).json(deleteplan);
     } catch (err: any) {
         res.status(400).json({error: err.message});
     }
 }
 
-export {getAllSections, createSection, getSectionById, updateSection, deleteSectionById}
+export {getAllPlan, createPlan, getPlanById, updatePlan, deletePlanById}

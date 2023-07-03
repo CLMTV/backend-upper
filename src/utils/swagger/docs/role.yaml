@@ -55,7 +55,7 @@ paths:
       tags:
         - 'Role'
       summary: Update role
-       parameters:
+      parameters:
         - in: path
           name: id
           schema:

@@ -14,6 +14,9 @@ import instrumentsRoutes from './instrument.routes';
 import roleRoutes from './role.routes';
 import videoRoutes from './video.routes';
 import timestampRoutes from './timestamp.routes'
+import planRoutes from './plan.routes'
+import challengeRoute from './challenge.route'
+import noteRoutes from './note.route'
 const app = express();
 
 const router = express.Router();
@@ -33,5 +36,8 @@ router.use('/instrument', instrumentsRoutes);
 router.use('/role', roleRoutes);
 router.use('/video', videoRoutes);
 router.use('/timestamp', timestampRoutes);
+router.use('/plan', planRoutes);
+router.use('/challenge', challengeRoute);
+router.use('/note', noteRoutes);
 
 export default router;
