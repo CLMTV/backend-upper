@@ -50,6 +50,9 @@ jobs:
           password: ${{ secrets.GIT_PASSWORD }}
           port: ${{ secrets.SERVER_PORT }}
           script: |
+            export NVM_DIR="/home/hetic/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            nvm use 20.3.1
             cd ${{ secrets.PROJECT_PATH }}
             npm ci
             npm i @prisma/client
