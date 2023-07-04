@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main # nom de la branche sur laquelle ce pipeline écoute le push
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Database migration
+        run: npx prisma migrate dev --name init
+
+      - name: Build
+        run: npm run build
+
+      - name: Push to Server
+        run: |
+          apt-get update
+          apt-get install -y sshpass
+
+          sshpass -p ${{ secrets.GIT_PASSWORD }} scp -r -P ${{ secret.SERVER_PORT }} ./ ${{ secrets.USER }}@${{ secrets.SERVER_HOST }}:${{ secrets.DESTINATION_PATH }}
