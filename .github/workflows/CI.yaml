@@ -47,11 +47,7 @@ jobs:
           node-version: 20.3.1
 
       - name: Install dependencies
-        run: 
-          cd /home/hetic/backend-upper
-          echo $PWD
-          npm ci
-          npm i @prisma/client
+        run: cd /home/hetic/backend-upper && npm ci && npm i @prisma/client
 
       - name: Database migration
         run: 
