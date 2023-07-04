@@ -36,16 +36,10 @@ jobs:
           sshpass -p ${{ secrets.GIT_PASSWORD }} ssh -o StrictHostKeyChecking=no -p ${{ secrets.SERVER_PORT }} ${{ secrets.USER }}@${{ secrets.SERVER_HOST }}
 
       - name: Copy files to server
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.USER }}
-          password: ${{ secrets.GIT_PASSWORD }}
-          port: ${{ secrets.SERVER_PORT }}
-          script: |
-            echo "Copying files to server"
-            scp -r -P ${{ secrets.SERVER_PORT }} $GITHUB_WORKSPACE/* ${{ secrets.USER }}@${{ secrets.SERVER_HOST }}:${{ secrets.DESTINATION_PATH }}
-            echo "File copy complete"
+        run: |
+          echo "Copying files to server"
+          sshpass -p ${{ secrets.GIT_PASSWORD }} scp -r -P ${{ secrets.SERVER_PORT }} $GITHUB_WORKSPACE/* ${{ secrets.USER }}@${{ secrets.SERVER_HOST }}:${{ secrets.DESTINATION_PATH }}
+          echo "File copy complete"
 
       - name: Set up Node.js
         uses: actions/setup-node@v2
