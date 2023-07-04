@@ -15,16 +15,14 @@ jobs:
         uses: actions/checkout@v3
       
       - name: Remove local files and images
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.SERVER_HOST }} # nom du serveur à mettre dans les secrets GITHUB
-          username: ${{ secrets.USER }} # nom du user
-          script: |
-            echo "cleaning all files"
-            GLOBALIGNORE=.env
-            rm -rf ${{ secrets.DESTINATION_PATH }}/*
+        run: |
+          sshpass -p ${{ secrets.GIT_PASSWORD }} scp -r -P ${{ secrets.SERVER_PORT }} ./ ${{ secrets.USER }}@${{ secrets.SERVER_HOST }}:${{ secrets.DESTINATION_PATH }}
 
-            echo "cleaning complete"
+          echo "cleaning all files"
+          GLOBALIGNORE=.env
+          rm -rf ${{ secrets.DESTINATION_PATH }}/*
+
+          echo "cleaning complete"
       
       - name: Push to Server
         run: |
