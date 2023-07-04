@@ -47,11 +47,12 @@ jobs:
           node-version: 20.3.1
 
       - name: Install dependencies
-        run: npm ci
+        run: 
+          npm ci
+          npm i @prisma/client
 
       - name: Database migration
-        run: 
-          cd "/home/hetic/backend-upper/src"
+        run:
           npx prisma migrate dev --name init -y
 
       - name: Build
