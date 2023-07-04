@@ -48,7 +48,8 @@ jobs:
 
       - name: Install dependencies
         run: 
-          npm i
+          echo $PWD
+          npm ci
           npm i @prisma/client
 
       - name: Database migration

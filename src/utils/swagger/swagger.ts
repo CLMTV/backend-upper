@@ -46,7 +46,7 @@ const swaggerDocs = (app: Express, port: number) => {
     })
     console.log(swaggerSpec);
 
-    console.log(`Docs available at http://localhost:${port}/docs`)
+    // console.log(`Docs available at http://localhost:${port}/docs`)
 }
 
 export default swaggerDocs
