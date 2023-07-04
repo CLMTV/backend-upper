@@ -48,14 +48,20 @@ jobs:
 
       - name: Install dependencies
         run: 
+          cd /home/hetic/backend-upper
           echo $PWD
           npm ci
           npm i @prisma/client
 
       - name: Database migration
         run: 
+          cd /home/hetic/backend-upper
+          echo $PWD
           npx prisma generate
           npx prisma migrate dev --name init
 
       - name: Build
-        run: npm run start
+        run: 
+          cd /home/hetic/backend-upper
+          echo $PWD
+          npm run start
