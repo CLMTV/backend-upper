@@ -34,7 +34,7 @@ jobs:
       - name: Copy files to server
         run: |
           echo "Copying files to server"
-          sshpass -p ${{ secrets.GIT_PASSWORD }} scp -r -P ${{ secrets.SERVER_PORT }} $GITHUB_WORKSPACE/* ${{ secrets.USER }}@${{ secrets.SERVER_HOST }}:${{ secrets.DESTINATION_PATH }}
+          sshpass -p ${{ secrets.GIT_PASSWORD }} scp -o StrictHostKeyChecking=no -r -P ${{ secrets.SERVER_PORT }} $GITHUB_WORKSPACE/* ${{ secrets.USER }}@${{ secrets.SERVER_HOST }}:${{ secrets.DESTINATION_PATH }}
           echo "File copy complete"
 
       - name: Set up Node.js
