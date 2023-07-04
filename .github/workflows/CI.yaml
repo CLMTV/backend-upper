@@ -29,4 +29,4 @@ jobs:
           apt-get update
           apt-get install -y sshpass
 
-          sshpass -p ${{ secrets.GIT_PASSWORD }} scp -r -P ${{ secret.SERVER_PORT }} ./ ${{ secrets.USER }}@${{ secrets.SERVER_HOST }}:${{ secrets.DESTINATION_PATH }}
+          sshpass -p ${{ secrets.GIT_PASSWORD }} scp -r -P ${{ secrets.SERVER_PORT }} ./ ${{ secrets.USER }}@${{ secrets.SERVER_HOST }}:${{ secrets.DESTINATION_PATH }}
