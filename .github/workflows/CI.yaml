@@ -45,7 +45,7 @@ jobs:
 
       - name: Database migration
         run: 
-          cd /home/hetic/backend-upper/src
+          cd "/home/hetic/backend-upper/src"
           npx prisma migrate dev --name init
 
       - name: Build
