@@ -30,8 +30,8 @@ jobs:
       
       - name: Push to Server
         run: |
-          apt-get update
-          apt-get install -y sshpass
+          sudo apt-get update
+          sudo apt-get install -y sshpass
 
           sshpass -p ${{ secrets.GIT_PASSWORD }} scp -r -P ${{ secrets.SERVER_PORT }} ./ ${{ secrets.USER }}@${{ secrets.SERVER_HOST }}:${{ secrets.DESTINATION_PATH }}
 
