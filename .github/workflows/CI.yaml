@@ -14,49 +14,12 @@ jobs:
       - name: Checkout code in runner
         uses: actions/checkout@v3
       
-      - name: Remove local files and images
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.SERVER_HOST }} # nom du serveur à mettre dans les secrets GITHUB
-          username: ${{ secrets.USER }} # nom du user
-          password: ${{ secrets.GIT_PASSWORD }}
-          port: ${{ secrets.SERVER_PORT }}
-          script: |
-            echo "cleaning all files"
-            GLOBALIGNORE=.env
-            rm -rf ${{ secrets.DESTINATION_PATH }}/*
-
-            echo "cleaning complete"
-      
-      - name: Update Apt
+      - name: Push to Server
         run: |
           sudo apt-get update
           sudo apt-get install -y sshpass
 
-          sshpass -p ${{ secrets.GIT_PASSWORD }} ssh -o StrictHostKeyChecking=no -p ${{ secrets.SERVER_PORT }} ${{ secrets.USER }}@${{ secrets.SERVER_HOST }}
-
-      - name: Copy files to server
-        run: |
-          echo "Copying files to server"
-          sshpass -p ${{ secrets.GIT_PASSWORD }} scp -r -P ${{ secrets.SERVER_PORT }} $GITHUB_WORKSPACE/* ${{ secrets.USER }}@${{ secrets.SERVER_HOST }}:${{ secrets.DESTINATION_PATH }}
-          echo "File copy complete"
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: 20.3.1
-
-      - name: Install dependencies
-        run: 
-          echo ${{ secrets.PROJECT_PATH }}
-          cd ${{ secrets.PROJECT_PATH }} && npm ci && npm i @prisma/client
-
-      - name: Database migration
-        run: 
-          cd /home/hetic/backend-upper
-          echo $PWD
-          npx prisma generate
-          npx prisma migrate dev --name init
+          sshpass -p ${{ secrets.GIT_PASSWORD }} ssh -o StrictHostKeyChecking=no -p ${{ secrets.SERVER_PORT }} ${{ secrets.USER }}@${{ secrets.SERVER_HOST }} 'cd ${{ secrets.DESTINATION_PATH }} && git pull'
 
       - name: Build
         run: 
