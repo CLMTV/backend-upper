@@ -56,6 +56,7 @@ jobs:
             cd ${{ secrets.PROJECT_PATH }}
             npm ci
             npm i @prisma/client
+            npm i -g pm2
             npx prisma generate
             npx prisma migrate dev --name init
-            npm run start
+            pm2 start npm --name "upper-backend" -- start

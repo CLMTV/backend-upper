@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon src/index.ts"
+    "start": "pm2 start npm --name 'upper-backend' -- run dev"
   },
   "prisma": {
     "schema": "src/database/prisma/schema.prisma"
