@@ -52,7 +52,9 @@ jobs:
           npm i @prisma/client
 
       - name: Database migration
-        run: npx prisma migrate dev --name init
+        run: 
+          npx prisma generate
+          npx prisma migrate dev --name init
 
       - name: Build
         run: npm run start
