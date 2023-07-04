@@ -48,6 +48,7 @@ jobs:
 
       - name: Install dependencies
         run: 
+          echo ${{ secrets.PROJECT_PATH }}
           cd ${{ secrets.PROJECT_PATH }} && npm ci && npm i @prisma/client
 
       - name: Database migration
