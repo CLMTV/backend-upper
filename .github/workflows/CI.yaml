@@ -43,6 +43,11 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Run docker
+        run: 
+          echo $PWD
+          docker compose up -d
+
       - name: Database migration
         run: npx prisma migrate dev --name init
 
