@@ -10,10 +10,33 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
+      - name: Checkout code in runner
+        uses: actions/checkout@v3
+      
+      - name: Remove local files and images
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_HOST }} # nom du serveur à mettre dans les secrets GITHUB
+          username: ${{ secrets.USER }} # nom du user
+          script: |
+            echo "cleaning all files"
+            GLOBALIGNORE=.env
+            rm -rf ${{ secrets.DESTINATION_PATH }}/*
+
+            echo "cleaning complete"
+      
+      - name: Push to Server
+        run: |
+          apt-get update
+          apt-get install -y sshpass
+
+          sshpass -p ${{ secrets.GIT_PASSWORD }} scp -r -P ${{ secrets.SERVER_PORT }} ./ ${{ secrets.USER }}@${{ secrets.SERVER_HOST }}:${{ secrets.DESTINATION_PATH }}
+
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: 18
+          node-version: 20.3.1
 
       - name: Install dependencies
         run: npm ci
@@ -22,11 +45,4 @@ jobs:
         run: npx prisma migrate dev --name init
 
       - name: Build
-        run: npm run build
-
-      - name: Push to Server
-        run: |
-          apt-get update
-          apt-get install -y sshpass
-
-          sshpass -p ${{ secrets.GIT_PASSWORD }} scp -r -P ${{ secrets.SERVER_PORT }} ./ ${{ secrets.USER }}@${{ secrets.SERVER_HOST }}:${{ secrets.DESTINATION_PATH }}
+        run: npm run start
