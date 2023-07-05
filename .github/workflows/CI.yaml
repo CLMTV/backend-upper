@@ -59,4 +59,5 @@ jobs:
             npm i -g pm2
             npx prisma generate
             npx prisma migrate dev --name init
-            nohup bash server-setup.sh &
+            bash server-setup.sh
+            exit
