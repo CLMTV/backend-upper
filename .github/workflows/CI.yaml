@@ -21,10 +21,10 @@ jobs:
           password: ${{ secrets.GIT_PASSWORD }}
           port: ${{ secrets.SERVER_PORT }}
           script: |
-            echo "cleaning all files"
-            GLOBALIGNORE=.env
-            rm -rf ${{ secrets.DESTINATION_PATH }}/*
-            echo "cleaning complete"
+            echo "Cleaning all files"
+            GLOBALIGNORE=".env server-setup.sh"
+            find ${{ secrets.DESTINATION_PATH }} -type f -not -name $GLOBALIGNORE -exec rm -f {} +
+            echo "Cleaning complete"
 
       - name: Update Apt
         run: |
