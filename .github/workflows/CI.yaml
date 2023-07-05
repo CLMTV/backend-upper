@@ -24,6 +24,7 @@ jobs:
             echo "Cleaning all files"
             GLOBALIGNORE=".env server-setup.sh"
             find ${{ secrets.DESTINATION_PATH }} -type f -not -name $GLOBALIGNORE -exec rm -f {} +
+            pm2 stop my-app
             echo "Cleaning complete"
 
       - name: Update Apt
@@ -60,4 +61,3 @@ jobs:
             npx prisma generate
             npx prisma migrate dev --name init
             bash server-setup.sh
-            exit
