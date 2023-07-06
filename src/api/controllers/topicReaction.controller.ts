@@ -25,11 +25,11 @@ const getTopicReactionById = async (req: Request, res: Response) => {
 
 const createTopicReaction = async (req: Request, res: Response) => {
     console.log(req.body)
-    const {is_liked, is_flagged, userId, messageId} = req.body || {};
+    const {is_liked, is_flagged, userId, topicId} = req.body || {};
 
     try {
         const topic_reaction = await prisma.topic_reaction.create({
-            data: {is_liked, is_flagged, userId, messageId},
+            data: {is_liked, is_flagged, userId, topicId},
         });
         res.status(201).json(topic_reaction);
     } catch (err: any) {
@@ -38,7 +38,7 @@ const createTopicReaction = async (req: Request, res: Response) => {
 }
 
 const updateTopicReaction = async (req: Request, res: Response) => {
-    const {is_liked, is_flagged, userId, messageId} = req.body || {};
+    const {is_liked, is_flagged, userId, topicId} = req.body || {};
     const {id} = req.params
 
     if (!id) {
@@ -54,7 +54,7 @@ const updateTopicReaction = async (req: Request, res: Response) => {
                 is_liked: is_liked,
                 is_flagged: is_flagged,
                 userId: userId,
-                messageId: messageId
+                topicId: topicId
             }
         })
         res.status(200).json(updateTopicReaction);
