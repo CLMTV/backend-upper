@@ -24,7 +24,7 @@ jobs:
             echo "Cleaning all files"
             pwd
             GLOBALIGNORE=".env server-setup.sh"
-            find ${{ secrets.DESTINATION_PATH }} -type f -not -name $GLOBALIGNORE -exec rm -f {} +
+            find ${{ secrets.DESTINATION_PATH }} -not -name $GLOBALIGNORE -exec rm -rf {} +
             pm2 stop my-app
             pm2 delete my-app
             echo "Cleaning complete"
