@@ -41,7 +41,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: 20.3.1
+          node-version: 20.4.0
 
       - name: Install dependencies and run scripts on server
         uses: appleboy/ssh-action@master
