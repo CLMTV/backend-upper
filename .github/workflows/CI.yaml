@@ -22,9 +22,11 @@ jobs:
           port: ${{ secrets.SERVER_PORT }}
           script: |
             echo "Cleaning all files"
+            pwd
             GLOBALIGNORE=".env server-setup.sh"
             find ${{ secrets.DESTINATION_PATH }} -type f -not -name $GLOBALIGNORE -exec rm -f {} +
             pm2 stop my-app
+            pm2 delete my-app
             echo "Cleaning complete"
 
       - name: Update Apt
@@ -58,6 +60,7 @@ jobs:
             npm ci
             npm i @prisma/client
             npm i -g pm2
+            npm i swagger
             npx prisma generate
             npx prisma migrate dev --name init
             bash server-setup.sh
