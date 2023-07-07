@@ -5,31 +5,6 @@ info:
 tags:
   - name: 'Badge'
 paths:
-  /badge/create:
-    post:
-      tags:
-        - 'Badge'
-      summary: Create a new badge
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                description:
-                  type: string
-                points:
-                  type: integer
-                display_img:
-                  type: string
-      responses:
-        '201':
-          description: Badge created
-        '400':
-          description: Bad request
   /badge/getAll:
     get:
       tags:
