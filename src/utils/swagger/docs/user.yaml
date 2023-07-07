@@ -24,9 +24,9 @@ paths:
                 password:
                   type: string
                 roleId:
-                  type: string
+                  type: integer
                 planId:
-                  type: string
+                  type: integer
       responses:
         '201':
           description: Returns the created user

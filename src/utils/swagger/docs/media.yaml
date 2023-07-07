@@ -1,0 +1,93 @@
+openapi: '3.0.0'
+info:
+  title: 'Media API'
+  version: '1.0.0'
+tags:
+  - name: 'Media'
+paths:
+  /media/create:
+    post:
+      tags:
+        - 'Media'
+      summary: Create a new media
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+      responses:
+        '201':
+          description: media created
+        '400':
+          description: Bad request
+  /media/getAll:
+    get:
+      tags:
+        - 'Media'
+      summary: Get all medias
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Bad request
+  /media/getById/{id}:
+    get:
+      tags:
+        - 'Media'
+      summary: Get media by id
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Bad request
+  /media/update/{id}:
+    patch:
+      tags:
+        - 'Media'
+      summary: Update media
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+      responses:
+        '200':
+          description: media updated
+        '400':
+          description: Bad request
+  /media/deleteById/{id}:
+    delete:
+      tags:
+        - 'Media'
+      summary: Delete media by id
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: media deleted
+        '400':
+          description: Bad request

@@ -1,0 +1,105 @@
+openapi: '3.0.0'
+info:
+  title: 'Result Snapshot API'
+  version: '1.0.0'
+tags:
+  - name: 'Result Snapshot'
+paths:
+  /resultSnapshot/create:
+    post:
+      tags:
+        - 'Result Snapshot'
+      summary: Create a new Result Snapshot
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tiktok_username:
+                  type: string
+                tiktok_video:
+                  type: string
+                tiktok_likes:
+                  type: integer
+                id_challenge:
+                  type: integer
+      responses:
+        '201':
+          description: Result Snapshot created
+        '400':
+          description: Bad request
+  /resultSnapshot/getAll:
+    get:
+      tags:
+        - 'Result Snapshot'
+      summary: Get all Result Snapshots
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Bad request
+  /resultSnapshot/getById/{id}:
+    get:
+      tags:
+        - 'Result Snapshot'
+      summary: Get Result Snapshot by id
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Bad request
+  /resultSnapshot/update/{id}:
+    patch:
+      tags:
+        - 'Result Snapshot'
+      summary: Update Result Snapshot
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tiktok_username:
+                  type: string
+                tiktok_video:
+                  type: string
+                tiktok_likes:
+                  type: integer
+                id_challenge:
+                  type: integer
+      responses:
+        '200':
+          description: Result Snapshot updated
+        '400':
+          description: Bad request
+  /resultSnapshot/deleteById/{id}:
+    delete:
+      tags:
+        - 'Result Snapshot'
+      summary: Delete Result Snapshot by id
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: Result Snapshot deleted
+        '400':
+          description: Bad request

@@ -1,0 +1,109 @@
+openapi: '3.0.0'
+info:
+  title: 'Ban API'
+  version: '1.0.0'
+tags:
+  - name: 'Ban'
+paths:
+  /ban/create:
+    post:
+      tags:
+        - 'Ban'
+      summary: Create a new ban
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                description:
+                  type: string
+                date_start:
+                  type: string
+                  format: date-time
+                date_end:
+                  type: string
+                  format: date-time
+                userId:
+                  type: integer
+      responses:
+        '201':
+          description: Ban created
+        '400':
+          description: Bad request
+  /ban/getAll:
+    get:
+      tags:
+        - 'Ban'
+      summary: Get all bans
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Bad request
+  /ban/getById/{id}:
+    get:
+      tags:
+        - 'Ban'
+      summary: Get Ban by id
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Bad request
+  /ban/update/{id}:
+    patch:
+      tags:
+        - 'Ban'
+      summary: Update ban
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                description:
+                  type: string
+                date_start:
+                  type: string
+                  format: date-time
+                date_end:
+                  type: string
+                  format: date-time
+                userId: 
+                  type: integer
+      responses:
+        '200':
+          description: Ban updated
+        '400':
+          description: Bad request
+  /ban/deleteById/{id}:
+    delete:
+      tags:
+        - 'Ban'
+      summary: Delete ban by id
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: Ban deleted
+        '400':
+          description: Bad request

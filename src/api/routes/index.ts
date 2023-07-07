@@ -17,6 +17,9 @@ import timestampRoutes from './timestamp.routes'
 import planRoutes from './plan.routes'
 import challengeRoute from './challenge.route'
 import noteRoutes from './note.route'
+import banRoutes from "./ban.routes"
+import mediaRoutes from "./media.routes"
+import resultSnapshotRoutes from "./resultSnapshot.routes"
 const app = express();
 
 const router = express.Router();
@@ -39,5 +42,8 @@ router.use('/timestamp', timestampRoutes);
 router.use('/plan', planRoutes);
 router.use('/challenge', challengeRoute);
 router.use('/note', noteRoutes);
+router.use('/ban', banRoutes);
+router.use('/media', mediaRoutes);
+router.use('/resultSnapshot', resultSnapshotRoutes);
 
 export default router;
