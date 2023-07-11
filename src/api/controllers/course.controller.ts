@@ -29,6 +29,8 @@ const getCourseById = async (req: Request, res: Response) => {
 
 const createCourse = async (req: Request, res: Response) => {
     const {name, description, lesson, badge, note} = req.body || {};
+    console.log("CONTROLER",req);
+    
     if (!name) {
         return res.status(400).json({error: 'name and description are required'});
     }
