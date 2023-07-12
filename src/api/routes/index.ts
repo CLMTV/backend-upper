@@ -20,6 +20,7 @@ import noteRoutes from './note.route'
 import banRoutes from "./ban.routes"
 import mediaRoutes from "./media.routes"
 import resultSnapshotRoutes from "./resultSnapshot.routes"
+import stripeRoute from "./stripe.routes"
 const app = express();
 
 const router = express.Router();
@@ -45,5 +46,6 @@ router.use('/note', noteRoutes);
 router.use('/ban', banRoutes);
 router.use('/media', mediaRoutes);
 router.use('/resultSnapshot', resultSnapshotRoutes);
+router.use('/stripe', stripeRoute);
 
 export default router;
