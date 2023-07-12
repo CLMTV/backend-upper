@@ -27,10 +27,10 @@ app.use(routes);
 (async () => {
     try {
       await createCourses();
-      await createVideo();
+      // await createVideo();
       await createLesson();
-      await createCategory();
-      await createInstrument();
+      // await createCategory();
+      // await createInstrument();
     } catch (error) {
       console.log("erreur mock", error);
     }

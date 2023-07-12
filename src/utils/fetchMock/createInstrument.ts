@@ -4,7 +4,7 @@ import { fetchWrapper } from "../fetch-wrapper";
 
 const categoryMock = _categoryMock();
 const instrumentMock = _instrumentMock(categoryMock.map(course => course.id))
-const url = `http://localhost:4000/categories/create`;
+const url = `http://localhost:4000/instrument/create`;
 
 export const createInstrument = async() => {
     for (let i = 0; i < instrumentMock.length; i++) {
