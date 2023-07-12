@@ -26,12 +26,14 @@ const loginUser = async (req: Request, res: Response) => {
             return res.status(400).json({error: 'Invalid email or password'});
         }
 
-        const token = jwt.sign({userId: user.id},'secretkey');
+        // specify the token to expire after 1 hour
+        const token = jwt.sign({userId: user.id},'secretkey', {expiresIn: '90d'});
         res.json({token});
     } catch (err: any) {
         res.status(400).json({error: err.message});
     }
 }
+
 
 
 
