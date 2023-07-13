@@ -5,7 +5,15 @@ const prisma = new PrismaClient();
 
 const getAllLesson = async (req: Request, res: Response) => {
     try {
-        const lesson = await prisma.lesson.findMany();
+        const lesson = await prisma.lesson.findMany({
+            include: {
+                course: true,
+                video: true, 
+                media: true, 
+                note: true, 
+                user_lesson: true
+            },
+          });
         res.status(200).json(lesson);
     } catch (err: any) {
         res.status(400).json({error: err.message});
@@ -17,6 +25,13 @@ const getLessonById = async (req: Request, res: Response) => {
     try {
         const parsedId = parseInt(id, 10);
         const lesson = await prisma.lesson.findUnique({
+            include: {
+                course: true,
+                video: true, 
+                media: true, 
+                note: true, 
+                user_lesson: true
+            },
             where: {
                 id: parsedId
             }

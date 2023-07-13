@@ -5,7 +5,11 @@ const prisma = new PrismaClient();
 
 const getAllBadges = async (req: Request, res: Response) => {
     try {
-        const badge = await prisma.badge.findMany();
+        const badge = await prisma.badge.findMany({
+            include: {
+                badge: true
+            }
+        });
         res.status(200).json(badge);
     } catch (err: any) {
         res.status(400).json({error: err.message});
@@ -16,6 +20,9 @@ const getBadgeById = async (req: Request, res: Response) => {
     const {id} = req.body
     try {
         const badge = await prisma.badge.findUnique({
+            include: {
+                badge: true
+            },
             where: {
                 id: id
             }

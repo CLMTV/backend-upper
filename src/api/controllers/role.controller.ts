@@ -6,7 +6,11 @@ const prisma = new PrismaClient();
 
 const getAllRoles = async (req: Request, res: Response) => {
     try {
-        const roles = await prisma.role.findMany();
+        const roles = await prisma.role.findMany({
+            include: {
+                user: true,
+            }
+        });
         res.status(200).json(roles);
     } catch (err: any) {
         res.status(400).json({error: err.message});
@@ -22,6 +26,9 @@ const getRoleById = async (req: Request, res: Response) => {
     try {
         const parsedId = parseInt(id, 10);
         const role = await prisma.role.findUnique({
+            include: {
+                user: true,
+            },
             where: {
                 id: parsedId
             }

@@ -5,7 +5,11 @@ const prisma = new PrismaClient();
 
 const getAllBan = async (req: Request, res: Response) => {
     try {
-        const ban = await prisma.ban.findMany();
+        const ban = await prisma.ban.findMany({
+            include: {
+                user: true
+            }
+        });
         res.status(200).json(ban);
     } catch (err: any) {
         res.status(400).json({error: err.message});
@@ -16,6 +20,9 @@ const getBanById = async (req: Request, res: Response) => {
     const {id} = req.body
     try {
         const ban = await prisma.ban.findUnique({
+            include: {
+                user: true
+            },
             where: {
                 id: id
             }

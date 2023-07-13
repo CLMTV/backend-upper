@@ -5,7 +5,13 @@ const prisma = new PrismaClient();
 
 const getAllNotes = async (req: Request, res: Response) => {
     try {
-        const note = await prisma.note.findMany();
+        const note = await prisma.note.findMany({
+            include: {
+                user: true, 
+                course: true,
+                lesson: true
+            }
+        });
         res.status(200).json(note);
     } catch (err: any) {
         res.status(400).json({error: err.message});
@@ -16,6 +22,11 @@ const getNoteById = async (req: Request, res: Response) => {
     const {id} = req.body
     try {
         const note = await prisma.note.findUnique({
+            include: {
+                user: true, 
+                course: true,
+                lesson: true
+            },
             where: {
                 id: id
             }

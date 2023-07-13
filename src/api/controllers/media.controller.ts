@@ -5,7 +5,11 @@ const prisma = new PrismaClient();
 
 const getAllMedia = async (req: Request, res: Response) => {
     try {
-        const media = await prisma.media.findMany();
+        const media = await prisma.media.findMany({
+            include: {
+                lesson: true
+            }
+        });
         res.status(200).json(media);
     } catch (err: any) {
         res.status(400).json({error: err.message});
@@ -16,6 +20,9 @@ const getMediaById = async (req: Request, res: Response) => {
     const {id} = req.body
     try {
         const media = await prisma.media.findUnique({
+            include: {
+                lesson: true
+            },
             where: {
                 id: id
             }

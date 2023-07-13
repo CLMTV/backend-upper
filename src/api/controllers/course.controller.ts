@@ -5,7 +5,14 @@ const prisma = new PrismaClient();
 
 const getAllCourses = async (req: Request, res: Response) => {
     try {
-        const course = await prisma.course.findMany();
+        const course = await prisma.course.findMany({
+            include: {
+                lesson: true,
+                badge: true,
+                note: true,
+                user_course: true,
+            }
+        });
         res.status(200).json(course);
     } catch (err: any) {
         res.status(400).json({error: err.message});
@@ -17,6 +24,12 @@ const getCourseById = async (req: Request, res: Response) => {
     try {
         const parsedId = parseInt(id, 10);
         const course = await prisma.course.findUnique({
+            include: {
+                lesson: true,
+                badge: true,
+                note: true,
+                user_course: true,
+            },
             where: {
                 id: parsedId
             }

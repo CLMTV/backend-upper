@@ -6,13 +6,18 @@ const prisma = new PrismaClient();
 // GET ALL challenge
 const getAllChallenge = async (req: Request, res: Response) => {
     try {
-        const challenge = await prisma.challenge.findMany();
+        const challenge = await prisma.challenge.findMany({
+            include: {
+                instrument: true, 
+                user: true, 
+                results_snapshot: true
+            }
+        });
         res.status(200).json(challenge);
     } catch (err: any) {
         res.status(400).json({error: err.message});
     }
 }
-
 
 // GET challenge BY ID
 const getChallengeById = async (req: Request, res: Response) => {
@@ -20,6 +25,11 @@ const getChallengeById = async (req: Request, res: Response) => {
     try {
         const parsedId = parseInt(id, 10);
         const challenge = await prisma.challenge.findUnique({
+            include: {
+                instrument: true, 
+                user: true, 
+                results_snapshot: true
+            },
             where: {
                 id: parsedId
             }

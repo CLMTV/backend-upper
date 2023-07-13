@@ -19,7 +19,8 @@ const getAllUserTopics = async (req: Request, res: Response) => {
                 authorId: parsedId
             },
             include: {
-                topic_reaction: true
+                user: true, 
+                topic_reaction: true, 
             }
         });
         res.status(200).json(topics);
@@ -43,7 +44,10 @@ const getAllSectionTopics = async (req: Request, res: Response) => {
                 sectionId: parsedId
             },
             include: {
-                topic_reaction: true
+                user: true, 
+                section: true, 
+                topic_reaction: true, 
+                message: true
             }
         });
         res.status(200).json(topics);
@@ -66,7 +70,10 @@ const getTopicById = async (req: Request, res: Response) => {
                 id: parsedId
             },
             include: {
-                topic_reaction: true
+                user: true, 
+                section: true, 
+                topic_reaction: true, 
+                message: true
             }
         });
         res.status(200).json(topic);

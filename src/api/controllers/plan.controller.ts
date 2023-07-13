@@ -5,7 +5,11 @@ const prisma = new PrismaClient();
 
 const getAllPlan = async (req: Request, res: Response) => {
     try {
-        const plan = await prisma.plan.findMany();
+        const plan = await prisma.plan.findMany({
+            include: {
+                user: true,
+            }
+        });
         res.status(200).json(plan);
     } catch (err: any) {
         res.status(400).json({error: err.message});
@@ -21,6 +25,9 @@ const getPlanById = async (req: Request, res: Response) => {
     try {
         const parsedId = parseInt(id, 10);
         const plan = await prisma.plan.findUnique({
+            include: {
+                user: true,
+            },
             where: {
                 id: parsedId
             }
