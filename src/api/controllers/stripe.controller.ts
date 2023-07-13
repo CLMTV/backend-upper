@@ -10,7 +10,7 @@ const stripe = Stripe(process.env.STRIPE_PRIVATE_KEY);
 
 const paymentIntentPremium = async (req: Request, res: Response) => {
     const intent = await stripe.paymentIntents.create({
-        amount: 1000,
+        amount: 1300,
         currency: 'eur',
         automatic_payment_methods: {
             enabled: true,
@@ -20,7 +20,7 @@ const paymentIntentPremium = async (req: Request, res: Response) => {
 };
 const paymentIntentVIP = async (req: Request, res: Response) => {
     const intent = await stripe.paymentIntents.create({
-        amount: 1200,
+        amount: 1700,
         currency: 'eur',
         automatic_payment_methods: {
             enabled: true,
