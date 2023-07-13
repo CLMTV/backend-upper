@@ -146,4 +146,26 @@ const deleteUserById = async (req: Request, res: Response) => {
     }
 }
 
-export {loginUser, getAllUsers, createUser, getUserById, updateUser, deleteUserById}
+const getUserIdFromToken = async (req: Request, res: Response) => {
+    const bearerHeader = req.headers['authorization'];
+
+    if (typeof bearerHeader !== 'undefined') {
+        const bearer = bearerHeader.split(' ');
+        const bearerToken = bearer[1];
+
+        try {
+            //verify the token
+            const decodedToken = jwt.verify(bearerToken, 'secretkey');
+            const userId = (decodedToken as any).userId;
+            res.json({ userId: userId });
+        } catch(err) {
+            res.status(401).json({ error: 'Invalid token' });
+        }
+    } else {
+        //Forbidden
+        res.sendStatus(403);
+    }
+}
+
+
+export {loginUser, getAllUsers, createUser, getUserById, updateUser, deleteUserById, getUserIdFromToken}
