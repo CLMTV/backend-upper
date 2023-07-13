@@ -5,7 +5,12 @@ const prisma = new PrismaClient();
 
 const getAllVideos = async (req: Request, res: Response) => {
     try {
-        const video = await prisma.video.findMany();
+        const video = await prisma.video.findMany({
+            include: {
+                lesson: true, 
+                timestamp: true
+            }
+        });
         res.status(200).json(video);
     } catch (err: any) {
         res.status(400).json({error: err.message});
@@ -17,6 +22,10 @@ const getVideoById = async (req: Request, res: Response) => {
     try {
         const parsedId = parseInt(id, 10);
         const video = await prisma.video.findUnique({
+            include: {
+                lesson: true, 
+                timestamp: true
+            },
             where: {
                 id: parsedId
             }

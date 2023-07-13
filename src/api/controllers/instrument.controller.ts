@@ -6,7 +6,13 @@ const prisma = new PrismaClient();
 // GET ALL INSTRUMENTS
 const getAllInstruments = async (req: Request, res: Response) => {
     try {
-        const instruments = await prisma.instrument.findMany();
+        const instruments = await prisma.instrument.findMany({
+            include: {
+                category: true, 
+                user: true, 
+                challenge: true
+            }
+        });
         res.status(200).json(instruments);
     } catch (err: any) {
         res.status(400).json({error: err.message});
@@ -20,6 +26,11 @@ const getInstrumentById = async (req: Request, res: Response) => {
     try {
         const parsedId = parseInt(id, 10);
         const instrument = await prisma.instrument.findUnique({
+            include: {
+                category: true, 
+                user: true, 
+                challenge: true
+            },
             where: {
                 id: parsedId
             }

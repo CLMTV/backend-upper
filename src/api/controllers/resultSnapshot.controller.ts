@@ -5,7 +5,11 @@ const prisma = new PrismaClient();
 
 const getAllResultSnapshot = async (req: Request, res: Response) => {
     try {
-        const resultSnapshot = await prisma.results_snapshot.findMany();
+        const resultSnapshot = await prisma.results_snapshot.findMany({
+            include: {
+                challenge: true
+            }
+        });
         res.status(200).json(resultSnapshot);
     } catch (err: any) {
         res.status(400).json({error: err.message});
@@ -21,6 +25,9 @@ const getResultSnapshotById = async (req: Request, res: Response) => {
     try {
         const parsedId = parseInt(id, 10);
         const resultSnapshot = await prisma.results_snapshot.findUnique({
+            include: {
+                challenge: true
+            },
             where: {
                 id: parsedId
             }

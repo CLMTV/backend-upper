@@ -34,12 +34,24 @@ const loginUser = async (req: Request, res: Response) => {
     }
 }
 
-
-
-
 const getAllUsers = async (req: Request, res: Response) => {
     try {
-        const users = await prisma.user.findMany();
+        const users = await prisma.user.findMany({
+            include: {
+                role: true, 
+                plan: true, 
+                challenge: true, 
+                topic: true, 
+                topic_reaction: true,
+                message: true,
+                message_reaction: true,
+                note: true,
+                instrument: true,
+                ban: true,
+                user_course: true,
+                user_lesson: true
+            }
+        });
         res.status(200).json(users);
     } catch (err: any) {
         res.status(400).json({error: err.message});
@@ -51,6 +63,20 @@ const getUserById = async (req: Request, res: Response) => {
     try {
         const parsedId = parseInt(id, 10);
         const user = await prisma.user.findUnique({
+            include: {
+                role: true, 
+                plan: true, 
+                challenge: true, 
+                topic: true, 
+                topic_reaction: true,
+                message: true,
+                message_reaction: true,
+                note: true,
+                instrument: true,
+                ban: true,
+                user_course: true,
+                user_lesson: true
+            },
             where: {
                 id: parsedId
             }

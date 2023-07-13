@@ -6,7 +6,11 @@ const prisma = new PrismaClient();
 
 const getAllSections = async (req: Request, res: Response) => {
     try {
-        const sections = await prisma.section.findMany();
+        const sections = await prisma.section.findMany({
+            include: {
+                topic: true
+            }
+        });
         res.status(200).json(sections);
     } catch (err: any) {
         res.status(400).json({error: err.message});
@@ -22,6 +26,9 @@ const getSectionById = async (req: Request, res: Response) => {
     try {
         const parsedId = parseInt(id, 10);
         const section = await prisma.section.findUnique({
+            include: {
+                topic: true
+            },
             where: {
                 id: parsedId
             }

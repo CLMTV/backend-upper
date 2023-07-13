@@ -13,6 +13,10 @@ const getTopicReactionById = async (req: Request, res: Response) => {
     try {
         const parsedId = parseInt(id, 10);
         const topic_reaction = await prisma.topic_reaction.findUnique({
+            include: {
+                user: true, 
+                topic: true
+            }, 
             where: {
                 id: parsedId
             }

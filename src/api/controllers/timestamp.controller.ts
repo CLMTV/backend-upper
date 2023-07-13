@@ -5,7 +5,11 @@ const prisma = new PrismaClient();
 
 const getAllTimestamp = async (req: Request, res: Response) => {
     try {
-        const timestamp = await prisma.timestamp.findMany();
+        const timestamp = await prisma.timestamp.findMany({
+            include: {
+                video: true
+            }
+        });
         res.status(200).json(timestamp);
     } catch (err: any) {
         res.status(400).json({error: err.message});
@@ -16,6 +20,9 @@ const getTimestampById = async (req: Request, res: Response) => {
     const {id} = req.body
     try {
         const timestamp = await prisma.timestamp.findUnique({
+            include: {
+                video: true
+            },
             where: {
                 id: id
             }
