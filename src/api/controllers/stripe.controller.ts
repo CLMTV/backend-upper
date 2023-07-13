@@ -8,20 +8,7 @@ dotenv.config();
 const Stripe = require('stripe');
 const stripe = Stripe(process.env.STRIPE_PRIVATE_KEY);
 
-const paymentIntentBasic = async (req: Request, res: Response) => {
-    try {
-        const intent = await stripe.paymentIntents.create({
-            amount: 500,
-            currency: 'eur',
-        });
-
-        res.json({ client_secret: intent.client_secret });
-    } catch (error) {
-        console.error(error);
-        res.status(500).send('An error occurred');
-    }
-};
-const paymentIntentPremium = async (req: any, res: any) => {
+const paymentIntentPremium = async (req: Request, res: Response) => {
     const intent = await stripe.paymentIntents.create({
         amount: 1000,
         currency: 'eur',
@@ -31,7 +18,7 @@ const paymentIntentPremium = async (req: any, res: any) => {
     });
     res.json({client_secret: intent.client_secret});
 };
-const paymentIntentVIP = async (req: any, res: any) => {
+const paymentIntentVIP = async (req: Request, res: Response) => {
     const intent = await stripe.paymentIntents.create({
         amount: 1200,
         currency: 'eur',
@@ -42,4 +29,4 @@ const paymentIntentVIP = async (req: any, res: any) => {
     res.json({client_secret: intent.client_secret});
 };
 
-export {paymentIntentBasic, paymentIntentPremium, paymentIntentVIP}
+export {paymentIntentPremium, paymentIntentVIP}
