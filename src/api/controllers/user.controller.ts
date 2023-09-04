@@ -93,6 +93,15 @@ const createUser = async (req: Request, res: Response) => {
         return res.status(400).json({error: 'firstname, lastname, email and password are required'});
     }
     try {
+        // Vérification si l'e-mail existe déjà dans la base de données
+        const existingEmail = await prisma.user.findUnique({
+            where: { email },
+        });
+
+        if (existingEmail) {
+            return res.status(400).json({ error: 'Email already exists' });
+        }
+
         const saltRounds = 10;
         const hashedPassword = await bcrypt.hash(password, saltRounds);
 
