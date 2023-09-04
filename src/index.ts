@@ -26,9 +26,9 @@ app.use(routes);
 
 (async () => {
     try {
-      await createCourses();
-      await createVideo();
-      await createLesson();
+      // await createCourses();
+      // await createVideo();
+      // await createLesson();
       // await createCategory();
       // await createInstrument();
     } catch (error) {
