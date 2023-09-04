@@ -21,6 +21,12 @@ paths:
                   type: string
                 description:
                   type: string
+                planId:
+                  type: integer
+                mediaId:
+                  type: integer
+                authorId:
+                  type: integer
       responses:
         '201':
           description: Course created
@@ -74,6 +80,12 @@ paths:
                   type: string
                 description:
                   type: string
+                planId:
+                  type: integer
+                mediaId:
+                  type: integer
+                authorId:
+                  type: integer
       responses:
         '200':
           description: Course updated

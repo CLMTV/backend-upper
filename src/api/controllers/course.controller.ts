@@ -41,15 +41,14 @@ const getCourseById = async (req: Request, res: Response) => {
 }
 
 const createCourse = async (req: Request, res: Response) => {
-    const {name, description, lesson, badge, note} = req.body || {};
-    console.log("CONTROLER",req);
+    const {name, description, planId, mediaId, authorId , lesson, badge, note} = req.body || {};
     
     if (!name) {
         return res.status(400).json({error: 'name and description are required'});
     }
     try {
         const course = await prisma.course.create({
-            data: {name, description, lesson, badge, note},
+            data: {name, description, planId, mediaId, authorId, lesson, badge, note},
         });
         res.status(201).json(course);
     } catch (err: any) {
@@ -58,7 +57,7 @@ const createCourse = async (req: Request, res: Response) => {
 }
 
 const updateCourse = async (req: Request, res: Response) => {
-    const {name, description} = req.body || {};
+    const {name, description, planId, mediaId, authorId} = req.body || {};
      const {id} = req.params;
     if (!id) {
         return res.status(400).json({error: 'id is required'});
@@ -71,7 +70,10 @@ const updateCourse = async (req: Request, res: Response) => {
             },
             data: {
                 name: name,
-                description: description
+                description: description,
+                planId: planId,
+                mediaId: mediaId, 
+                authorId: authorId
             }
         })
         res.status(200).json(updateCourse);
