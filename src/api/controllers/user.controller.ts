@@ -177,4 +177,27 @@ const getUserIdFromToken = async (req: Request, res: Response) => {
 }
 
 
-export {loginUser, getAllUsers, createUser, getUserById, updateUser, deleteUserById, getUserIdFromToken}
+const changePlanId = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const parsedId = parseInt(id, 10);
+
+    const newPlanId = req.body.newPlanId; // Assuming the key in the request body is "newPlanId"
+
+    try {
+        const updatedUser = await prisma.user.update({
+            where: {
+                id: parsedId,
+            },
+            data: {
+                planId: newPlanId,
+            },
+        });
+
+        res.status(200).json(updatedUser);
+    } catch (err: any) {
+        res.status(400).json({ error: err.message });
+    }
+};
+
+
+export {loginUser, getAllUsers, createUser, getUserById, updateUser, deleteUserById, getUserIdFromToken, changePlanId }

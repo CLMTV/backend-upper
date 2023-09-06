@@ -6,7 +6,8 @@ import {
     getUserById,
     updateUser,
     deleteUserById,
-    getUserIdFromToken
+    getUserIdFromToken,
+    changePlanId
 } from "../controllers/user.controller";
 import verifyToken from '../middlewares/verifyToken';
 
@@ -21,5 +22,5 @@ router.get('/getById/:id', verifyToken, getUserById);
 router.patch('/update/:id', verifyToken, updateUser);
 router.delete('/deleteById/:id', verifyToken, deleteUserById);
 router.get('/getUserFromToken', verifyToken, getUserIdFromToken);
-
+router.post('/changePlanId', verifyToken, changePlanId)
 export default router;
