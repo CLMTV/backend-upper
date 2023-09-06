@@ -22,5 +22,5 @@ router.get('/getById/:id', verifyToken, getUserById);
 router.patch('/update/:id', verifyToken, updateUser);
 router.delete('/deleteById/:id', verifyToken, deleteUserById);
 router.get('/getUserFromToken', verifyToken, getUserIdFromToken);
-router.post('/changePlanId', verifyToken, changePlanId)
+router.patch('/changePlanId', verifyToken, changePlanId)
 export default router;
