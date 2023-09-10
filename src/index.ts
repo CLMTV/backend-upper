@@ -17,8 +17,9 @@ app.use(express.json());
 
 // Enable All CORS Requests
 app.use(cors({
-    origin: 'http://localhost:3000', // restrict calls to those this address
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', // only allow GET, HEAD, PUT, PATCH, POST, DELETE requests
+    //origin: 'http://localhost:3000', // restrict calls to those this address
+    origin: '*', // allow all origins
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', // allow GET, HEAD, PUT, PATCH, POST, DELETE requests
     credentials: true // allow session cookie from browser to pass through
 }));
 
